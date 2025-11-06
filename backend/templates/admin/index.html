@@ -1,0 +1,77 @@
+{% extends "admin/index.html" %}
+{% load i18n admin_urls static admin_list %}
+
+{% block content %}
+<div class="dashboard">
+    {% for app in app_list %}
+    <div class="module">
+        <table>
+            <caption>
+                <a href="{{ app.app_url }}" class="section" title="{% blocktrans with name=app.name %}Models in the {{ name }} application{% endblocktrans %}">
+                    {{ app.name }}
+                </a>
+            </caption>
+            {% for model in app.models %}
+            <tr class="model-{{ model.object_name|lower }}">
+                {% if model.admin_url %}
+                <th scope="row"><a href="{{ model.admin_url }}">{{ model.name }}</a></th>
+                {% else %}
+                <th scope="row">{{ model.name }}</th>
+                {% endif %}
+
+                {% if model.add_url %}
+                <td><a href="{{ model.add_url }}" class="addlink" title="{% blocktrans %}Add {{ model.name }}{% endblocktrans %}">➕ Add</a></td>
+                {% else %}
+                <td>&nbsp;</td>
+                {% endif %}
+
+                {% if model.admin_url %}
+                <td><a href="{{ model.admin_url }}" class="changelink" title="{% blocktrans %}Change {{ model.name }}{% endblocktrans %}">✏️ Change</a></td>
+                {% else %}
+                <td>&nbsp;</td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% empty %}
+    <p>{% trans "You don't have permission to view or edit anything." %}</p>
+    {% endfor %}
+</div>
+
+<!-- Quick Links Section -->
+<div class="quick-links">
+    <a href="/manage/dashboard/" class="quick-link-card">
+        <div class="quick-link-card-icon">📊</div>
+        <div class="quick-link-card-title">Modern Admin Dashboard</div>
+        <div style="font-size: 12px; color: #6c757d; margin-top: 4px;">View enhanced dashboard</div>
+    </a>
+    
+    <a href="/api/admin-panel/dashboard/" class="quick-link-card">
+        <div class="quick-link-card-icon">📈</div>
+        <div class="quick-link-card-title">API Statistics</div>
+        <div style="font-size: 12px; color: #6c757d; margin-top: 4px;">View detailed stats</div>
+    </a>
+    
+    <a href="/" class="quick-link-card">
+        <div class="quick-link-card-icon">🏠</div>
+        <div class="quick-link-card-title">Frontend Homepage</div>
+        <div style="font-size: 12px; color: #6c757d; margin-top: 4px;">Go to marketplace</div>
+    </a>
+    
+    <a href="/manage/" class="quick-link-card">
+        <div class="quick-link-card-icon">⚙️</div>
+        <div class="quick-link-card-title">Management Panel</div>
+        <div style="font-size: 12px; color: #6c757d; margin-top: 4px;">Enhanced management</div>
+    </a>
+</div>
+
+<!-- Welcome Message -->
+<div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 24px; border-radius: 8px; margin-top: 24px;">
+    <h2 style="margin: 0 0 8px 0; font-size: 20px;">👋 Welcome to AIT Marketplace Admin</h2>
+    <p style="margin: 0; opacity: 0.9;">
+        Manage your marketplace efficiently. Use the links above to access different management interfaces.
+    </p>
+</div>
+{% endblock %}
+

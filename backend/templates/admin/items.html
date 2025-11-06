@@ -1,0 +1,169 @@
+{% extends 'admin/base.html' %}
+
+{% block content %}
+<h2 style="margin-bottom: 24px; color: #495057; display: flex; align-items: center; gap: 8px;">
+    📦 Item Management
+    <span style="font-size: 14px; font-weight: normal; color: #6c757d;">({{ items.paginator.count }} total)</span>
+</h2>
+
+<!-- Bulk Actions Bar -->
+<div class="bulk-actions" id="bulkActions">
+    <span class="count" id="selectedCount">0 selected</span>
+    <button class="btn btn-success btn-sm" onclick="bulkAction('activate')">Activate Selected</button>
+    <button class="btn btn-danger btn-sm" onclick="bulkAction('deactivate')">Deactivate Selected</button>
+    <button class="btn btn-sm" style="background: #ffc107; color: white;" onclick="bulkAction('feature')">Feature Selected</button>
+    <button class="btn btn-sm" style="background: #6c757d; color: white;" onclick="clearSelection()">Clear</button>
+</div>
+
+<div class="toolbar">
+    <form method="get" class="search-box">
+        <input type="text" name="search" placeholder="🔍 Search item title or seller..." value="{{ search }}" autocomplete="off">
+        <button type="submit" class="btn btn-primary" style="position: absolute; right: 0; top: 0; height: 100%; border-radius: 0 8px 8px 0;">Search</button>
+    </form>
+    
+    <div style="display: flex; gap: 8px;">
+        <a href="?is_available=1" class="btn btn-success btn-sm">Available</a>
+        <a href="?is_available=0" class="btn btn-sm" style="background: #6c757d; color: white;">Sold</a>
+        <a href="?is_featured=1" class="btn btn-sm" style="background: #ffc107; color: white;">Featured</a>
+        <a href="?is_barter=1" class="btn btn-sm" style="background: #17a2b8; color: white;">Barter</a>
+        <a href="{% url 'admin_items' %}" class="btn btn-sm" style="background: #6c757d; color: white;">Reset</a>
+    </div>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th style="width: 50px;">
+                <input type="checkbox" id="selectAll" class="checkbox" title="Select all">
+            </th>
+            <th class="sortable">ID</th>
+            <th class="sortable">Title</th>
+            <th class="sortable">Seller</th>
+            <th class="sortable">Price</th>
+            <th>Status</th>
+            <th class="sortable">Orders</th>
+            <th class="sortable">Created</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in items %}
+        <tr>
+            <td>
+                <input type="checkbox" name="selected_ids" value="{{ item.id }}" class="checkbox">
+            </td>
+            <td>{{ item.id }}</td>
+            <td><strong>{{ item.title|truncatewords:8 }}</strong></td>
+            <td>{{ item.owner.username }}</td>
+            <td>{% if item.price %}¥{{ item.price }}{% else %}Negotiable{% endif %}</td>
+            <td>
+                {% if item.is_available %}
+                <span class="badge badge-success">Available</span>
+                {% else %}
+                <span class="badge badge-danger">Sold</span>
+                {% endif %}
+                {% if item.is_featured %}
+                <span class="badge badge-warning" style="margin-left: 4px;">⭐ Featured</span>
+                {% endif %}
+                {% if item.is_barter %}
+                <span class="badge badge-info" style="margin-left: 4px;">Barter</span>
+                {% endif %}
+            </td>
+            <td>{{ item.orders_count }}</td>
+            <td>{{ item.created_at|date:"M d, Y" }}</td>
+            <td>
+                <form method="post" action="{% url 'admin_items_action' item.id %}" style="display: inline;" onsubmit="return confirmAction('Are you sure?', this)">
+                    {% csrf_token %}
+                    <input type="hidden" name="action" value="toggle_available">
+                    <button type="submit" class="btn btn-sm {% if item.is_available %}btn-danger{% else %}btn-success{% endif %}">
+                        {% if item.is_available %}Deactivate{% else %}Activate{% endif %}
+                    </button>
+                </form>
+                <form method="post" action="{% url 'admin_items_action' item.id %}" style="display: inline; margin-left: 4px;">
+                    {% csrf_token %}
+                    <input type="hidden" name="action" value="toggle_featured">
+                    <button type="submit" class="btn btn-sm btn-primary">
+                        {% if item.is_featured %}Unfeature{% else %}Feature{% endif %}
+                    </button>
+                </form>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="9">
+                <div class="empty-state">
+                    <div class="empty-state-icon">📦</div>
+                    <h3>No Items Found</h3>
+                    <p>Try adjusting your search or filters</p>
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% if items.has_other_pages %}
+<div class="pagination">
+    {% if items.has_previous %}
+    <a href="?page={{ items.previous_page_number }}{% if search %}&search={{ search }}{% endif %}">‹ Previous</a>
+    {% else %}
+    <span class="disabled">‹ Previous</span>
+    {% endif %}
+    
+    {% for num in items.paginator.page_range %}
+        {% if items.number == num %}
+        <span class="active">{{ num }}</span>
+        {% elif num > items.number|add:"-3" and num < items.number|add:"3" %}
+        <a href="?page={{ num }}{% if search %}&search={{ search }}{% endif %}">{{ num }}</a>
+        {% endif %}
+    {% endfor %}
+    
+    {% if items.has_next %}
+    <a href="?page={{ items.next_page_number }}{% if search %}&search={{ search }}{% endif %}">Next ›</a>
+    {% else %}
+    <span class="disabled">Next ›</span>
+    {% endif %}
+    
+    <span style="margin-left: 16px; color: #6c757d; font-size: 14px;">
+        Showing {{ items.start_index }}-{{ items.end_index }} of {{ items.paginator.count }}
+    </span>
+</div>
+{% endif %}
+
+<script>
+function confirmAction(message, form) {
+    showConfirm('Confirm Action', message, function() {
+        form.submit();
+    });
+    return false;
+}
+
+function bulkAction(action) {
+    const selected = Array.from(document.querySelectorAll('input[name="selected_ids"]:checked')).map(cb => cb.value);
+    if (selected.length === 0) {
+        showToast('Please select at least one item', 'error');
+        return;
+    }
+    
+    const actionText = {
+        'activate': 'activate',
+        'deactivate': 'deactivate',
+        'feature': 'feature'
+    }[action];
+    
+    showConfirm('Confirm Bulk Action', `Are you sure you want to ${actionText} ${selected.length} item(s)?`, function() {
+        showToast('Bulk action feature coming soon!', 'error');
+        // TODO: Implement bulk action endpoint
+    });
+}
+
+function clearSelection() {
+    document.querySelectorAll('input[name="selected_ids"]').forEach(cb => {
+        cb.checked = false;
+        cb.closest('tr').classList.remove('selected');
+    });
+    document.getElementById('selectAll').checked = false;
+    document.getElementById('bulkActions').classList.remove('active');
+}
+</script>
+{% endblock %}

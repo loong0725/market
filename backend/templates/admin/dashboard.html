@@ -1,0 +1,181 @@
+{% extends 'admin/base.html' %}
+
+{% block content %}
+<div class="stats-grid">
+    <div class="stat-card">
+        <h3>Total Users</h3>
+        <div class="value">{{ total_users }}</div>
+        <p style="margin-top: 8px; opacity: 0.8;">Verified: {{ verified_users }}</p>
+        {% if user_growth != 0 %}
+        <div class="trend">
+            <span>{{ user_growth|floatformat:1 }}%</span>
+            <span>{% if user_growth > 0 %}↑{% else %}↓{% endif %}</span>
+            <span>vs last week</span>
+        </div>
+        {% endif %}
+    </div>
+    
+    <div class="stat-card secondary">
+        <h3>Total Items</h3>
+        <div class="value">{{ total_items }}</div>
+        <p style="margin-top: 8px; opacity: 0.8;">Available: {{ available_items }}</p>
+        {% if item_growth != 0 %}
+        <div class="trend">
+            <span>{{ item_growth|floatformat:1 }}%</span>
+            <span>{% if item_growth > 0 %}↑{% else %}↓{% endif %}</span>
+            <span>vs last week</span>
+        </div>
+        {% endif %}
+    </div>
+    
+    <div class="stat-card success">
+        <h3>Total Orders</h3>
+        <div class="value">{{ total_orders }}</div>
+        <p style="margin-top: 8px; opacity: 0.8;">Completed: {{ completed_orders }} | Pending: {{ pending_orders }}</p>
+        {% if order_growth != 0 %}
+        <div class="trend">
+            <span>{{ order_growth|floatformat:1 }}%</span>
+            <span>{% if order_growth > 0 %}↑{% else %}↓{% endif %}</span>
+            <span>vs last week</span>
+        </div>
+        {% endif %}
+    </div>
+    
+    <div class="stat-card warning">
+        <h3>Total Revenue</h3>
+        <div class="value">¥{{ total_revenue|floatformat:2 }}</div>
+        <p style="margin-top: 8px; opacity: 0.8;">This Month: ¥{{ monthly_revenue|floatformat:2 }}</p>
+    </div>
+</div>
+
+<div class="stats-grid">
+    <div class="stat-card" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+        <h3>Barter Requests</h3>
+        <div class="value">{{ total_barter }}</div>
+    </div>
+    
+    <div class="stat-card secondary">
+        <h3>Wanted Items</h3>
+        <div class="value">{{ total_wanted }}</div>
+    </div>
+    
+    <div class="stat-card success">
+        <h3>Active Memberships</h3>
+        <div class="value">{{ active_memberships }}</div>
+    </div>
+    
+    <div class="stat-card warning">
+        <h3>Featured Items</h3>
+        <div class="value">{{ featured_items }}</div>
+    </div>
+</div>
+
+<!-- Daily Trends Chart -->
+<div style="background: #f8f9fa; padding: 24px; border-radius: 12px; margin-top: 32px;">
+    <h2 style="margin-bottom: 24px; color: #495057; display: flex; align-items: center; gap: 8px;">
+        📈 Daily Trends (Last 7 Days)
+    </h2>
+    <div style="background: white; padding: 24px; border-radius: 8px;">
+        <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 12px; align-items: end; height: 200px;">
+            {% for day in daily_stats %}
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                <div style="display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 150px; width: 100%;">
+                    {% if recent_users > 0 %}
+                    <div style="background: linear-gradient(to top, #667eea, #764ba2); width: 100%; border-radius: 4px 4px 0 0; margin-bottom: 2px; min-height: {% if day.users > 0 %}10px{% else %}2px{% endif %}; height: {% widthratio day.users recent_users 150 %}px;" title="Users: {{ day.users }}"></div>
+                    {% else %}
+                    <div style="width: 100%; margin-bottom: 2px; min-height: 2px; height: 2px;" title="Users: {{ day.users }}"></div>
+                    {% endif %}
+                    {% if recent_items > 0 %}
+                    <div style="background: linear-gradient(to top, #f093fb, #f5576c); width: 100%; border-radius: 4px 4px 0 0; margin-bottom: 2px; min-height: {% if day.items > 0 %}10px{% else %}2px{% endif %}; height: {% widthratio day.items recent_items 150 %}px;" title="Items: {{ day.items }}"></div>
+                    {% else %}
+                    <div style="width: 100%; margin-bottom: 2px; min-height: 2px; height: 2px;" title="Items: {{ day.items }}"></div>
+                    {% endif %}
+                    {% if recent_orders > 0 %}
+                    <div style="background: linear-gradient(to top, #4facfe, #00f2fe); width: 100%; border-radius: 4px 4px 0 0; min-height: {% if day.orders > 0 %}10px{% else %}2px{% endif %}; height: {% widthratio day.orders recent_orders 150 %}px;" title="Orders: {{ day.orders }}"></div>
+                    {% else %}
+                    <div style="width: 100%; min-height: 2px; height: 2px;" title="Orders: {{ day.orders }}"></div>
+                    {% endif %}
+                </div>
+                <div style="font-size: 11px; color: #6c757d; text-align: center;">
+                    {{ day.date|date:"M d" }}
+                </div>
+                <div style="font-size: 10px; color: #6c757d; text-align: center;">
+                    U:{{ day.users }} I:{{ day.items }} O:{{ day.orders }}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div style="display: flex; gap: 16px; justify-content: center; margin-top: 16px; font-size: 12px;">
+            <div style="display: flex; align-items: center; gap: 6px;">
+                <div style="width: 12px; height: 12px; background: linear-gradient(to top, #667eea, #764ba2); border-radius: 2px;"></div>
+                <span>Users</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 6px;">
+                <div style="width: 12px; height: 12px; background: linear-gradient(to top, #f093fb, #f5576c); border-radius: 2px;"></div>
+                <span>Items</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 6px;">
+                <div style="width: 12px; height: 12px; background: linear-gradient(to top, #4facfe, #00f2fe); border-radius: 2px;"></div>
+                <span>Orders</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Actions -->
+<div style="margin-top: 32px;">
+    <h2 style="margin-bottom: 16px; color: #495057;">⚡ Quick Actions</h2>
+    <div class="quick-actions">
+        <a href="{% url 'admin_users' %}?is_verified=0" class="quick-action-card">
+            <div class="quick-action-card-icon">👤</div>
+            <div class="quick-action-card-title">Unverified Users</div>
+        </a>
+        <a href="{% url 'admin_items' %}?is_available=0" class="quick-action-card">
+            <div class="quick-action-card-icon">📦</div>
+            <div class="quick-action-card-title">Sold Items</div>
+        </a>
+        <a href="{% url 'admin_orders' %}?status=pending" class="quick-action-card">
+            <div class="quick-action-card-icon">🛒</div>
+            <div class="quick-action-card-title">Pending Orders ({{ pending_orders }})</div>
+        </a>
+        <a href="{% url 'admin_items' %}?is_featured=1" class="quick-action-card">
+            <div class="quick-action-card-icon">⭐</div>
+            <div class="quick-action-card-title">Featured Items</div>
+        </a>
+    </div>
+</div>
+
+<!-- Recent Activity Summary -->
+<div style="background: #f8f9fa; padding: 24px; border-radius: 12px; margin-top: 32px;">
+    <h2 style="margin-bottom: 20px; color: #495057;">Recent Activity Summary (Last 7 Days)</h2>
+    <div class="stats-grid">
+        <div style="background: white; padding: 20px; border-radius: 8px; text-align: center; border: 2px solid #e9ecef;">
+            <div style="font-size: 32px; font-weight: bold; color: #667eea; margin-bottom: 8px;">{{ recent_users }}</div>
+            <div style="color: #6c757d; font-weight: 500;">New Users</div>
+            {% if user_growth != 0 %}
+            <div style="font-size: 12px; color: {% if user_growth > 0 %}#28a745{% else %}#dc3545{% endif %}; margin-top: 4px;">
+                {% if user_growth > 0 %}+{% endif %}{{ user_growth|floatformat:1 }}% vs previous week
+            </div>
+            {% endif %}
+        </div>
+        <div style="background: white; padding: 20px; border-radius: 8px; text-align: center; border: 2px solid #e9ecef;">
+            <div style="font-size: 32px; font-weight: bold; color: #f093fb; margin-bottom: 8px;">{{ recent_items }}</div>
+            <div style="color: #6c757d; font-weight: 500;">New Items</div>
+            {% if item_growth != 0 %}
+            <div style="font-size: 12px; color: {% if item_growth > 0 %}#28a745{% else %}#dc3545{% endif %}; margin-top: 4px;">
+                {% if item_growth > 0 %}+{% endif %}{{ item_growth|floatformat:1 }}% vs previous week
+            </div>
+            {% endif %}
+        </div>
+        <div style="background: white; padding: 20px; border-radius: 8px; text-align: center; border: 2px solid #e9ecef;">
+            <div style="font-size: 32px; font-weight: bold; color: #4facfe; margin-bottom: 8px;">{{ recent_orders }}</div>
+            <div style="color: #6c757d; font-weight: 500;">New Orders</div>
+            {% if order_growth != 0 %}
+            <div style="font-size: 12px; color: {% if order_growth > 0 %}#28a745{% else %}#dc3545{% endif %}; margin-top: 4px;">
+                {% if order_growth > 0 %}+{% endif %}{{ order_growth|floatformat:1 }}% vs previous week
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

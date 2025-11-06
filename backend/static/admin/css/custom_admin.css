@@ -1,0 +1,196 @@
+/* Custom Admin Styles for AIT Marketplace */
+
+/* Dashboard improvements */
+.dashboard .module table {
+    width: 100%;
+}
+
+.dashboard .module table a {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.dashboard .module table a:hover {
+    text-decoration: underline;
+}
+
+/* Statistics cards */
+.stats-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+}
+
+.stats-card h3 {
+    margin: 0 0 8px 0;
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.stats-card .value {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+/* Quick links */
+.quick-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-top: 24px;
+}
+
+.quick-link-card {
+    background: white;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    transition: all 0.2s;
+    text-decoration: none;
+    color: inherit;
+}
+
+.quick-link-card:hover {
+    border-color: #667eea;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(102, 126, 234, 0.2);
+}
+
+.quick-link-card-icon {
+    font-size: 32px;
+    margin-bottom: 12px;
+}
+
+.quick-link-card-title {
+    font-weight: 600;
+    color: #495057;
+}
+
+/* Model list improvements */
+#changelist .results {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+#changelist table thead th {
+    background: #f8f9fa;
+    border-bottom: 2px solid #e9ecef;
+    font-weight: 600;
+    padding: 12px;
+}
+
+#changelist table tbody tr {
+    transition: background-color 0.15s;
+}
+
+#changelist table tbody tr:hover {
+    background: #f8f9fa;
+}
+
+#changelist table tbody td {
+    padding: 12px;
+}
+
+/* Filter sidebar */
+#changelist-filter li {
+    padding: 8px 0;
+}
+
+#changelist-filter li a {
+    color: #495057;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+#changelist-filter li.selected a,
+#changelist-filter li a:hover {
+    color: #667eea;
+    font-weight: 500;
+}
+
+/* Search bar */
+#changelist-search {
+    background: white;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+#changelist-search input[type="text"] {
+    width: 100%;
+    padding: 10px 12px;
+    border: 2px solid #e9ecef;
+    border-radius: 6px;
+}
+
+/* Form improvements */
+fieldset {
+    background: white;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 20px;
+}
+
+fieldset legend {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+/* Related field improvements */
+.related-widget-wrapper {
+    border: 2px solid #e9ecef;
+    border-radius: 6px;
+    padding: 8px;
+}
+
+/* Button improvements */
+.default, input[type="submit"].default, .submit-row input.default {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+}
+
+.button, input[type="submit"], button, .submit-row input, a.button {
+    border-radius: 6px;
+    transition: all 0.2s;
+}
+
+.button:hover, input[type="submit"]:hover, button:hover, a.button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+}
+
+/* Delete confirmation */
+.delete-confirmation {
+    background: white;
+    border-radius: 8px;
+    padding: 24px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.delete-confirmation h1 {
+    color: #dc3545;
+    margin-bottom: 16px;
+}
+
+/* Responsive improvements */
+@media (max-width: 768px) {
+    .dashboard {
+        grid-template-columns: 1fr;
+    }
+    
+    .quick-links {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+

@@ -1,0 +1,78 @@
+{% extends 'admin/base.html' %}
+
+{% block content %}
+<h2 style="margin-bottom: 24px; color: #495057;">Order Management</h2>
+
+<div class="toolbar">
+    <form method="get" class="search-box" style="display: flex; gap: 8px;">
+        <input type="text" name="search" placeholder="Search buyer, seller or item..." value="{{ search }}">
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+    
+    <a href="?status=delivered" class="btn btn-success btn-sm">Delivered</a>
+    <a href="?payment_status=paid" class="btn btn-sm" style="background: #28a745; color: white;">Paid</a>
+    <a href="{% url 'admin_orders' %}" class="btn btn-sm" style="background: #6c757d; color: white;">Reset</a>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Item</th>
+            <th>Buyer</th>
+            <th>Seller</th>
+            <th>Amount</th>
+            <th>Status</th>
+            <th>Payment</th>
+            <th>Created</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for order in orders %}
+        <tr>
+            <td><strong>#{{ order.id }}</strong></td>
+            <td>{{ order.item.title|truncatewords:5 }}</td>
+            <td>{{ order.buyer.username }}</td>
+            <td>{{ order.seller.username }}</td>
+            <td><strong>¥{{ order.total_price }}</strong></td>
+            <td>
+                {% if order.status == 'delivered' %}
+                <span class="badge badge-success">{{ order.status }}</span>
+                {% elif order.status == 'cancelled' %}
+                <span class="badge badge-danger">{{ order.status }}</span>
+                {% else %}
+                <span class="badge badge-warning">{{ order.status }}</span>
+                {% endif %}
+            </td>
+            <td>
+                {% if order.payment_status == 'paid' %}
+                <span class="badge badge-success">Paid</span>
+                {% else %}
+                <span class="badge badge-warning">{{ order.payment_status }}</span>
+                {% endif %}
+            </td>
+            <td>{{ order.created_at|date:"Y-m-d H:i" }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="8" style="text-align: center; padding: 40px; color: #6c757d;">No order data</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% if orders.has_other_pages %}
+<div class="pagination">
+    {% if orders.has_previous %}
+    <a href="?page={{ orders.previous_page_number }}{% if search %}&search={{ search }}{% endif %}">Previous</a>
+    {% endif %}
+    
+    <span class="active">{{ orders.number }} / {{ orders.paginator.num_pages }}</span>
+    
+    {% if orders.has_next %}
+    <a href="?page={{ orders.next_page_number }}{% if search %}&search={{ search }}{% endif %}">Next</a>
+    {% endif %}
+</div>
+{% endif %}
+{% endblock %}
+

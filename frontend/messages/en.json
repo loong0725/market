@@ -1,0 +1,138 @@
+{
+  "common": {
+    "search": "Search items...",
+    "login": "Login",
+    "register": "Register",
+    "profile": "Profile",
+    "messages": "Messages",
+    "publish": "Publish Item",
+    "home": "Home",
+    "categories": "Categories",
+    "more": "View More",
+    "loading": "Loading...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "edit": "Edit",
+    "delete": "Delete",
+    "confirm": "Confirm",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "submit": "Submit",
+    "success": "Success",
+    "error": "Error",
+    "warning": "Warning",
+    "info": "Info"
+  },
+  "navigation": {
+    "phone": "Phone",
+    "digital": "Digital",
+    "computer": "Computer",
+    "clothing": "Clothing",
+    "bag": "Bags",
+    "sports": "Sports",
+    "skill": "Skills",
+    "beauty": "Beauty",
+    "furniture": "Furniture",
+    "books": "Books",
+    "games": "Games",
+    "other": "Other"
+  },
+  "home": {
+    "title": "AIT Campus Marketplace",
+    "subtitle": "Buy, sell, and trade second-hand items. Let your unused items shine again",
+    "publishButton": "Publish Item",
+    "searchButton": "Search Items",
+    "categoriesTitle": "Product Categories",
+    "recommendedTitle": "Recommended for You",
+    "hotTags": "Popular Tags",
+    "latestActivity": "Latest Activity",
+    "noImage": "No Image",
+    "negotiable": "Negotiable",
+    "anonymous": "Anonymous User"
+  },
+  "personal": {
+    "title": "Personal Center",
+    "profile": "Profile",
+    "myItems": "My Items",
+    "myOrders": "My Orders",
+    "myFavorites": "My Favorites",
+    "quickActions": "Quick Actions",
+    "publishNew": "Publish New Item",
+    "searchItems": "Search Items",
+    "messageCenter": "Message Center",
+    "editProfile": "Edit Profile",
+    "username": "Username",
+    "email": "Email",
+    "phone": "Phone",
+    "major": "Major",
+    "bio": "Bio",
+    "bioPlaceholder": "Tell us about yourself...",
+    "itemsCount": "Items Published",
+    "noOrders": "No orders yet",
+    "noFavorites": "No favorite items",
+    "status": {
+      "active": "Active",
+      "sold": "Sold",
+      "draft": "Draft"
+    }
+  },
+  "publish": {
+    "title": "Publish Item",
+    "subtitle": "Share your unused items and let them shine again",
+    "steps": {
+      "basic": "Basic Info",
+      "details": "Details",
+      "confirm": "Confirm"
+    },
+    "form": {
+      "itemTitle": "Item Title",
+      "itemTitlePlaceholder": "e.g., iPhone 13 Pro 128GB Space Gray",
+      "itemTitleTip": "A clear and concise title attracts more buyers",
+      "category": "Category",
+      "condition": "Condition",
+      "description": "Description",
+      "descriptionPlaceholder": "Describe the item's usage, accessories, purchase date, etc...",
+      "price": "Price (¥)",
+      "pricePlaceholder": "e.g., 3500",
+      "location": "Location",
+      "locationPlaceholder": "e.g., AIT Campus",
+      "contact": "Contact",
+      "contactPlaceholder": "Phone number or WeChat",
+      "image": "Item Image",
+      "imagePlaceholder": "Image URL",
+      "imageTip": "Supports jpg, png formats, recommended size 800x600",
+      "barter": "Also accept bartering",
+      "desiredItem": "Desired Item",
+      "desiredItemPlaceholder": "e.g., MacBook Air or cash"
+    },
+    "conditions": {
+      "new": "New",
+      "like_new": "Like New",
+      "good": "Good",
+      "fair": "Fair",
+      "poor": "Poor"
+    },
+    "tips": {
+      "title": "Publishing Tips",
+      "image": "📸 Quality Images",
+      "imageDesc": "Clear photos increase item appeal, suggest multiple angles",
+      "description": "📝 Detailed Description",
+      "descriptionDesc": "Honestly describe item condition, including purchase date and usage",
+      "pricing": "💰 Reasonable Pricing",
+      "pricingDesc": "Reference similar items for reasonable pricing",
+      "safety": "🔒 Safe Trading",
+      "safetyDesc": "Recommend face-to-face trading on campus for safety"
+    },
+    "confirm": {
+      "title": "Confirm Publishing",
+      "description": "After publishing, your item will appear on the homepage and category pages for others to browse and contact you.",
+      "note": "If there are any issues, you can edit or delist the item anytime in your personal center."
+    }
+  },
+  "footer": {
+    "copyright": "© 2024 AIT Marketplace",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service"
+  }
+}

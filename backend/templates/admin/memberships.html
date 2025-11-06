@@ -1,0 +1,71 @@
+{% extends 'admin/base.html' %}
+
+{% block content %}
+<h2 style="margin-bottom: 24px; color: #495057;">Membership Management</h2>
+
+<div class="toolbar">
+    <form method="get" class="search-box" style="display: flex; gap: 8px;">
+        <input type="text" name="search" placeholder="Search username..." value="{{ search }}">
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+    
+    <a href="?is_active=1" class="btn btn-success btn-sm">Active Members</a>
+    <a href="{% url 'admin_memberships' %}" class="btn btn-sm" style="background: #6c757d; color: white;">Reset</a>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>User</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Price</th>
+            <th>Status</th>
+            <th>Time Remaining</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for membership in memberships %}
+        <tr>
+            <td><strong>{{ membership.user.username }}</strong></td>
+            <td>{{ membership.start_date|date:"Y-m-d H:i" }}</td>
+            <td>{{ membership.end_date|date:"Y-m-d H:i" }}</td>
+            <td>¥{{ membership.price }}</td>
+            <td>
+                {% if membership.is_valid %}
+                <span class="badge badge-success">Valid</span>
+                {% else %}
+                <span class="badge badge-danger">Expired</span>
+                {% endif %}
+            </td>
+            <td>
+                {% if membership.is_valid %}
+                {{ membership.end_date|timeuntil }}
+                {% else %}
+                <span style="color: #6c757d;">Expired</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6" style="text-align: center; padding: 40px; color: #6c757d;">No membership data</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% if memberships.has_other_pages %}
+<div class="pagination">
+    {% if memberships.has_previous %}
+    <a href="?page={{ memberships.previous_page_number }}{% if search %}&search={{ search }}{% endif %}">Previous</a>
+    {% endif %}
+    
+    <span class="active">{{ memberships.number }} / {{ memberships.paginator.num_pages }}</span>
+    
+    {% if memberships.has_next %}
+    <a href="?page={{ memberships.next_page_number }}{% if search %}&search={{ search }}{% endif %}">Next</a>
+    {% endif %}
+</div>
+{% endif %}
+{% endblock %}
+
