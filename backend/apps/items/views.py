@@ -12,19 +12,34 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
         return obj.owner == request.user
 
 class ItemViewSet(viewsets.ModelViewSet):
-    queryset = Item.objects.all()
+    queryset = Item.objects.filter(is_available=True)
     serializer_class = ItemSerializer
+    # Allow anyone to view items (read), but require authentication for create/update/delete
+    # IsAuthenticatedOrReadOnly allows unauthenticated users to read (GET, HEAD, OPTIONS)
+    # IsOwnerOrReadOnly ensures only owners can modify their items
     permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+    
+    def get_permissions(self):
+        """
+        Override to ensure list and retrieve actions are accessible to everyone
+        """
+        if self.action in ['list', 'retrieve']:
+            # Allow anyone to list and view items (no authentication required)
+            return [permissions.AllowAny()]
+        # For create, update, delete - require authentication and ownership
+        return super().get_permissions()
 
     def get_queryset(self):
-        queryset = Item.objects.all()
+        # By default, show only available items to all users
+        queryset = Item.objects.filter(is_available=True)
+        
         # Filter by owner if owner parameter is provided
         owner_id = self.request.query_params.get('owner', None)
         if owner_id is not None:
             queryset = queryset.filter(owner_id=owner_id)
-        # If authenticated, allow filtering by 'my' to get current user's items
+        # If authenticated, allow filtering by 'my' to get current user's items (including unavailable)
         elif self.request.query_params.get('my', None) == 'true' and self.request.user.is_authenticated:
-            queryset = queryset.filter(owner=self.request.user)
+            queryset = Item.objects.filter(owner=self.request.user)  # Show all user's items, even unavailable
         # Filter featured items
         if self.request.query_params.get('featured', None) == 'true':
             queryset = queryset.filter(is_featured=True, is_available=True)

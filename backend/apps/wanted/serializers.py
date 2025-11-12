@@ -9,7 +9,7 @@ class WantedItemSerializer(serializers.ModelSerializer):
         fields = (
             "id", "user", "user_username", "title", "description", "max_price",
             "category", "condition_preference", "contact_phone", "location",
-            "is_active", "created_at", "updated_at",
+            "is_active", "paid_amount", "is_free_post", "created_at", "updated_at",
         )
         read_only_fields = ("user", "created_at", "updated_at")
 

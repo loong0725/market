@@ -21,6 +21,8 @@ class WantedItem(models.Model):
     contact_phone = models.CharField(max_length=50, blank=True)
     location = models.CharField(max_length=200, blank=True)
     is_active = models.BooleanField(default=True)
+    paid_amount = models.DecimalField(max_digits=8, decimal_places=2, default=0, help_text="Amount paid for posting this wanted item")
+    is_free_post = models.BooleanField(default=False, help_text="Whether this post used a free posting credit")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

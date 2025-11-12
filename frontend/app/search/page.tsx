@@ -63,23 +63,23 @@ export default function SearchPage() {
             <div className="card-body">
               <h3 className="font-semibold mb-4 flex items-center gap-2">
                 <Filter className="h-4 w-4" />
-                {t('search.filters', 'กรองผลลัพธ์')}
+                {t('search.filters', 'Filters')}
               </h3>
               
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium mb-2">{t('search.category', 'หมวดหมู่')}</label>
+                  <label className="block text-sm font-medium mb-2">{t('search.category', 'Category')}</label>
                   <input
                     type="text"
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
                     className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm"
-                    placeholder={t('search.categoryPlaceholder', 'เลือกหมวดหมู่')}
+                    placeholder={t('search.categoryPlaceholder', 'Select category')}
                   />
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium mb-2">{t('search.minPrice', 'ราคาต่ำสุด')}</label>
+                  <label className="block text-sm font-medium mb-2">{t('search.minPrice', 'Min Price')}</label>
                   <input
                     type="number"
                     value={minPrice}
@@ -90,7 +90,7 @@ export default function SearchPage() {
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium mb-2">{t('search.maxPrice', 'ราคาสูงสุด')}</label>
+                  <label className="block text-sm font-medium mb-2">{t('search.maxPrice', 'Max Price')}</label>
                   <input
                     type="number"
                     value={maxPrice}
@@ -101,7 +101,7 @@ export default function SearchPage() {
                 </div>
                 
                 <button onClick={searchItems} className="btn-primary w-full">
-                  {t('search.apply', 'ใช้งาน')}
+                  {t('search.apply', 'Apply Filters')}
                 </button>
               </div>
             </div>
@@ -119,11 +119,11 @@ export default function SearchPage() {
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && searchItems()}
                 className="w-full pl-10 pr-3 py-2 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-400"
-                placeholder={t('search.placeholder', 'ค้นหาสินค้า...')}
+                placeholder={t('search.placeholder', 'Search items...')}
               />
             </div>
             <button onClick={searchItems} className="btn-primary mt-3 w-full">
-              {t('search.search', 'ค้นหา')}
+              {t('search.search', 'Search')}
             </button>
           </div>
 
@@ -143,7 +143,7 @@ export default function SearchPage() {
             <div className="card">
               <div className="card-body text-center py-16">
                 <div className="text-slate-400 dark:text-slate-500">
-                  {t('search.noResults', 'ไม่พบผลลัพธ์')}
+                  {t('search.noResults', 'No results found')}
                 </div>
               </div>
             </div>
@@ -168,7 +168,7 @@ export default function SearchPage() {
                       {item.description || '—'}
                     </p>
                     <div className="mt-4 text-lg font-bold text-indigo-600 dark:text-indigo-400">
-                      {item.price != null ? `¥${item.price}` : t('item.negotiable', '面议')}
+                      {item.price != null ? `${item.price} ${t('item.priceSymbol', 'THB')}` : t('item.negotiable', 'Negotiable')}
                     </div>
                   </div>
                 </Link>

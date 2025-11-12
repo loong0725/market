@@ -112,9 +112,9 @@ function CartPageContent() {
         <div className="card">
           <div className="card-body text-center py-16">
             <ShoppingCart className="h-16 w-16 mx-auto text-slate-400 mb-4" />
-            <h3 className="text-lg font-semibold mb-2">{t('cart.empty', 'ตะกร้าว่างเปล่า')}</h3>
-            <p className="text-slate-600 dark:text-slate-400 mb-6">{t('cart.emptyDesc', 'เพิ่มสินค้าลงตะกร้าก่อน')}</p>
-            <Link href="/" className="btn-primary">{t('cart.browse', 'ไปเลือกสินค้า')}</Link>
+            <h3 className="text-lg font-semibold mb-2">{t('cart.empty', 'Cart is empty')}</h3>
+            <p className="text-slate-600 dark:text-slate-400 mb-6">{t('cart.emptyDesc', 'Add items to your cart first')}</p>
+            <Link href="/" className="btn-primary">{t('cart.browse', 'Browse Items')}</Link>
           </div>
         </div>
       </div>
@@ -123,7 +123,7 @@ function CartPageContent() {
 
   return (
     <div className="container-app mt-8">
-      <h1 className="text-2xl font-bold mb-6">{t('cart.title', 'ตะกร้าสินค้า')}</h1>
+      <h1 className="text-2xl font-bold mb-6">{t('cart.title', 'Shopping Cart')}</h1>
       
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 space-y-4">
@@ -154,7 +154,7 @@ function CartPageContent() {
                     
                     <div className="mt-2 flex items-center justify-between">
                       <div className="text-lg font-bold text-indigo-600 dark:text-indigo-400">
-                        {cartItem.item.price ? `¥${cartItem.item.price}` : t('item.negotiable', '面议')}
+                        {cartItem.item.price ? `${cartItem.item.price} ${t('item.priceSymbol', 'THB')}` : t('item.negotiable', 'Negotiable')}
                       </div>
                       
                       <div className="flex items-center gap-3">
@@ -182,7 +182,7 @@ function CartPageContent() {
                     </div>
                     
                     <div className="mt-2 text-sm text-slate-600 dark:text-slate-400">
-                      {t('cart.subtotal', 'ยอดรวม')}: ¥{cartItem.item.price ? cartItem.item.price * cartItem.quantity : 0}
+                      {t('cart.subtotal', 'Subtotal')}: {cartItem.item.price ? cartItem.item.price * cartItem.quantity : 0} {t('item.priceSymbol', 'THB')}
                     </div>
                   </div>
                 </div>
@@ -194,25 +194,25 @@ function CartPageContent() {
         <div className="lg:col-span-1">
           <div className="card sticky top-24">
             <div className="card-body">
-              <h3 className="font-semibold mb-4">{t('cart.summary', 'สรุปคำสั่งซื้อ')}</h3>
+              <h3 className="font-semibold mb-4">{t('cart.summary', 'Order Summary')}</h3>
               
               <div className="space-y-3 mb-6">
                 <div className="flex justify-between text-slate-600 dark:text-slate-400">
-                  <span>{t('cart.items', 'จำนวนสินค้า')}</span>
-                  <span>{cart.total_items} {t('cart.pieces', 'ชิ้น')}</span>
+                  <span>{t('cart.items', 'Items')}</span>
+                  <span>{cart.total_items} {t('cart.pieces', 'pieces')}</span>
                 </div>
                 <div className="flex justify-between text-lg font-bold">
-                  <span>{t('cart.total', '总计')}</span>
-                  <span>¥{cart.total_price}</span>
+                  <span>{t('cart.total', 'Total')}</span>
+                  <span>{cart.total_price} {t('item.priceSymbol', 'THB')}</span>
                 </div>
               </div>
 
               <button onClick={checkout} className="btn-primary w-full">
-                {t('cart.checkout', 'ไปชำระเงิน')}
+                {t('cart.checkout', 'Checkout')}
               </button>
               
               <Link href="/" className="btn-outline w-full mt-3 block text-center">
-                {t('cart.continue', '继续购物')}
+                {t('cart.continue', 'Continue Shopping')}
               </Link>
             </div>
           </div>

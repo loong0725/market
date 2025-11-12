@@ -65,6 +65,11 @@ export default function WantedPage() {
               {t('wanted.postWanted', 'Post Wanted')}
             </Link>
           )}
+          {!isAuthenticated && (
+            <Link href="/login" className="btn-outline">
+              {t('wanted.loginToPost', 'Login to Post')}
+            </Link>
+          )}
         </div>
 
         {loading ? (
@@ -89,7 +94,7 @@ export default function WantedPage() {
                         <h3 className="text-xl font-bold text-gray-900 dark:text-white">{item.title}</h3>
                         {item.max_price && (
                           <span className="px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 text-xs font-medium rounded">
-                            {t('wanted.maxPrice', 'Max Price:')} ¥{item.max_price}
+                            {t('wanted.maxPrice', 'Max Price:')} {item.max_price} {t('item.priceSymbol', 'THB')}
                           </span>
                         )}
                       </div>

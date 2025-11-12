@@ -243,7 +243,7 @@ export default function PersonalPage() {
                 </div>
                 <div>
                   <h3 className="text-xl font-bold text-gray-900 dark:text-white">{t('personal.membership', 'Membership')}</h3>
-                  <p className="text-gray-600 dark:text-gray-400 text-sm">199 THB/月 · {t('home.membership.feature', 'Feature your items')}</p>
+                  <p className="text-gray-600 dark:text-gray-400 text-sm">199 {t('item.priceSymbol', 'THB')}/{t('common.month', 'month')} · {t('home.membership.feature', 'Feature your items')}</p>
                 </div>
               </div>
               <MembershipSection />
@@ -501,7 +501,7 @@ export default function PersonalPage() {
                         <p className="line-clamp-2 text-sm text-gray-600 mb-4">{item.description}</p>
                         <div className="flex items-center justify-between text-sm mb-4">
                           <span className="font-bold text-brand-600 text-lg">
-                            {item.price ? `${item.price} THB` : t('personal.priceNegotiable', 'Negotiable')}
+                            {item.price ? `${item.price} ${t('item.priceSymbol', 'THB')}` : t('personal.priceNegotiable', 'Negotiable')}
                           </span>
                           <div className="text-xs text-gray-500">
                             {new Date(item.created_at).toLocaleDateString('zh-CN')}

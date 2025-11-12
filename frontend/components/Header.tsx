@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { Search, ShoppingBag, Send, User, LogOut, Heart, ShoppingCart } from 'lucide-react'
+import { Search, ShoppingBag, Send, User, LogOut, Heart, ShoppingCart, MessageCircle } from 'lucide-react'
 import { useI18n } from './I18nProviderClient'
 import { useAuth } from './AuthProvider'
 import LanguageButton from './LanguageButton'
@@ -66,6 +66,9 @@ export default function Header() {
             <>
               <Link href="/cart" className="btn-ghost relative">
                 <ShoppingCart className="h-4 w-4" />
+              </Link>
+              <Link href="/chat" className="btn-ghost relative">
+                <MessageCircle className="h-4 w-4" />
               </Link>
               <Link href="/wishlist" className="btn-ghost">
                 <Heart className="h-4 w-4" />

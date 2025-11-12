@@ -90,15 +90,15 @@ function OrdersPageContent() {
 
   return (
     <div className="container-app mt-8">
-      <h1 className="text-2xl font-bold mb-6">{t('orders.title', 'คำสั่งซื้อของฉัน')}</h1>
+      <h1 className="text-2xl font-bold mb-6">{t('orders.title', 'My Orders')}</h1>
 
       {orders.length === 0 ? (
         <div className="card">
           <div className="card-body text-center py-16">
             <Package className="h-16 w-16 mx-auto text-slate-400 mb-4" />
-            <h3 className="text-lg font-semibold mb-2">{t('orders.empty', 'ยังไม่มีคำสั่งซื้อ')}</h3>
-            <p className="text-slate-600 dark:text-slate-400 mb-6">{t('orders.emptyDesc', 'เริ่มช้อปปิ้งกันเลย!')}</p>
-            <Link href="/" className="btn-primary">{t('orders.browse', 'ไปเลือกสินค้า')}</Link>
+            <h3 className="text-lg font-semibold mb-2">{t('orders.empty', 'No orders yet')}</h3>
+            <p className="text-slate-600 dark:text-slate-400 mb-6">{t('orders.emptyDesc', 'Start shopping now!')}</p>
+            <Link href="/" className="btn-primary">{t('orders.browse', 'Browse Items')}</Link>
           </div>
         </div>
       ) : (
@@ -148,7 +148,7 @@ function OrdersPageContent() {
                           <span className="font-medium">{getStatusText(order.status)}</span>
                         </div>
                         <div className="text-lg font-bold text-indigo-600 dark:text-indigo-400">
-                          ¥{order.total_price}
+                          {order.total_price} {t('item.priceSymbol', 'THB')}
                         </div>
                         <div className="text-xs text-slate-500 dark:text-slate-500 mt-1">
                           {t('orders.payment', 'Payment')}: {order.payment_status === 'paid' ? t('orders.paid', 'Paid') : t('orders.unpaid', 'Unpaid')}

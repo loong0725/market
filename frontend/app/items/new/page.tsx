@@ -113,7 +113,7 @@ export default function NewItemPage() {
   const submit = async () => {
     // Validation
     if (!form.contact_phone) {
-      setMsg(t('post.contactRequired', '联系方式为必填项'))
+      setMsg(t('post.contactRequired', 'Contact information is required'))
       return
     }
     
@@ -213,7 +213,7 @@ export default function NewItemPage() {
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      {t('post.form.category', '商品分类')} <span className="text-red-500">*</span>
+                      {t('post.form.category', 'Category')} <span className="text-red-500">*</span>
                     </label>
                     <div className="grid grid-cols-3 gap-3">
                       {categories.map((cat) => (
@@ -240,7 +240,7 @@ export default function NewItemPage() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">{t('post.form.condition', '商品成色')}</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">{t('post.form.condition', 'Condition')}</label>
                     <div className="grid grid-cols-2 gap-3">
                       {conditions.map((cond) => (
                         <button
@@ -302,11 +302,11 @@ export default function NewItemPage() {
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      {t('post.form.contact', '联系方式')} <span className="text-red-500">*</span>
+                      {t('post.form.contact', 'Contact')} <span className="text-red-500">*</span>
                     </label>
                     <input 
                       className="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500" 
-                      placeholder={t('post.form.contactPlaceholder', '手机号码或微信号')}
+                      placeholder={t('post.form.contactPlaceholder', 'Phone number or WeChat ID')}
                       value={form.contact_phone}
                       onChange={e => onChange('contact_phone', e.target.value)} 
                       required
@@ -429,13 +429,13 @@ export default function NewItemPage() {
                         <h4 className="font-semibold text-gray-900">{form.title}</h4>
                         <p className="text-sm text-gray-600 mt-1">{form.description}</p>
                         <div className="flex items-center gap-4 mt-2 text-sm text-gray-500">
-                          <span>{t('post.confirm.category', '分类：')}{categories.find(c => c.value === form.category)?.label}</span>
-                          <span>{t('post.confirm.condition', '成色：')}{conditions.find(c => c.value === form.condition)?.label}</span>
-                          {form.price && <span>{t('post.confirm.price', '价格：')}¥{form.price}</span>}
+                          <span>{t('post.confirm.category', 'Category:')} {categories.find(c => c.value === form.category)?.label}</span>
+                          <span>{t('post.confirm.condition', 'Condition:')} {conditions.find(c => c.value === form.condition)?.label}</span>
+                          {form.price && <span>{t('post.confirm.price', 'Price:')} {form.price} {t('item.priceSymbol', 'THB')}</span>}
                         </div>
                         {form.contact_phone && (
                           <div className="mt-2 text-sm text-gray-600">
-                            {t('post.confirm.contact', '联系方式')}: {form.contact_phone}
+                            {t('post.confirm.contact', 'Contact:')} {form.contact_phone}
                           </div>
                         )}
                       </div>
@@ -443,8 +443,8 @@ export default function NewItemPage() {
                   </div>
 
                   <div className="text-sm text-gray-600">
-                    <p>{t('post.confirm.note1', '发布后，你的商品将出现在首页和分类页面中，其他用户可以浏览和联系你。')}</p>
-                    <p className="mt-2">{t('post.confirm.note2', '如有问题，可以随时在个人中心编辑或下架商品。')}</p>
+                    <p>{t('post.confirm.note1', 'After posting, your item will appear on the homepage and category pages, and other users can browse and contact you.')}</p>
+                    <p className="mt-2">{t('post.confirm.note2', 'If you have any questions, you can edit or remove your item in the personal center at any time.')}</p>
                   </div>
                 </div>
               )}

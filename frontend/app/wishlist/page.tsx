@@ -85,7 +85,7 @@ function WishlistPageContent() {
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold flex items-center gap-2">
           <Heart className="h-6 w-6 text-pink-500" />
-          {t('wishlist.title', 'รายการโปรด')}
+          {t('wishlist.title', 'Wishlist')}
         </h1>
       </div>
 
@@ -93,9 +93,9 @@ function WishlistPageContent() {
         <div className="card">
           <div className="card-body text-center py-16">
             <Heart className="h-16 w-16 mx-auto text-slate-400 mb-4" />
-            <h3 className="text-lg font-semibold mb-2">{t('wishlist.empty', 'ยังไม่มีรายการโปรด')}</h3>
-            <p className="text-slate-600 dark:text-slate-400 mb-6">{t('wishlist.emptyDesc', 'เพิ่มสินค้าที่ชอบลงรายการโปรด')}</p>
-            <Link href="/" className="btn-primary">{t('wishlist.browse', 'ไปเลือกสินค้า')}</Link>
+            <h3 className="text-lg font-semibold mb-2">{t('wishlist.empty', 'Wishlist is empty')}</h3>
+            <p className="text-slate-600 dark:text-slate-400 mb-6">{t('wishlist.emptyDesc', 'Add items you like to your wishlist')}</p>
+            <Link href="/" className="btn-primary">{t('wishlist.browse', 'Browse Items')}</Link>
           </div>
         </div>
       ) : (
@@ -137,7 +137,7 @@ function WishlistPageContent() {
 
                 <div className="mt-4 flex items-center justify-between">
                   <div className="text-lg font-bold text-indigo-600 dark:text-indigo-400">
-                    {wishlistItem.item.price != null ? `¥${wishlistItem.item.price}` : t('item.negotiable', '面议')}
+                    {wishlistItem.item.price != null ? `${wishlistItem.item.price} ${t('item.priceSymbol', 'THB')}` : t('item.negotiable', 'Negotiable')}
                   </div>
                   
                   <Link
@@ -145,19 +145,19 @@ function WishlistPageContent() {
                     className="btn-outline text-sm px-3 py-1.5 flex items-center gap-1"
                   >
                     <Eye className="h-3 w-3" />
-                    {t('wishlist.view', 'ดูรายละเอียด')}
+                    {t('wishlist.view', 'View Details')}
                   </Link>
                 </div>
 
                 {wishlistItem.item.owner_username && (
                   <div className="mt-2 text-xs text-slate-500 dark:text-slate-400">
-                    {t('item.seller', 'ผู้ขาย')}: {wishlistItem.item.owner_username}
+                    {t('item.seller', 'Seller')}: {wishlistItem.item.owner_username}
                   </div>
                 )}
 
                 {wishlistItem.notes && (
                   <div className="mt-2 text-xs text-slate-600 dark:text-slate-400 italic">
-                    {t('wishlist.notes', 'หมายเหตุ')}: {wishlistItem.notes}
+                    {t('wishlist.notes', 'Notes')}: {wishlistItem.notes}
                   </div>
                 )}
               </div>

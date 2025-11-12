@@ -1,0 +1,1868 @@
+# Final Project Report: AIT Second-Hand Marketplace Platform
+
+**A Comprehensive E-Business Platform for Student Union Management**
+
+**Asian Institute of Technology (AIT)**  
+**www.ait.ac.th**
+
+---
+
+## Abstract
+
+This report presents a comprehensive analysis of the AIT Second-Hand Marketplace Platform, a specialized Consumer-to-Consumer (C2C) e-commerce solution designed exclusively for the Asian Institute of Technology student community. The platform addresses critical challenges faced by students in acquiring and disposing of essential items while promoting sustainability, economic efficiency, and community engagement. 
+
+The system implements a modern full-stack architecture using Next.js and Django REST Framework, featuring unique capabilities including barter trading, integrated private messaging system with conversation-based interface, and community forums. The platform operates within a secure, campus-restricted environment, utilizing face-to-face transactions without online payment processing to maintain trust and reduce complexity.
+
+The business model follows a freemium approach, ensuring accessibility for all AIT community members while generating sustainable revenue through premium memberships and featured listings. Financial projections indicate break-even achievement in Year 2, with profitability established by Year 3. The platform contributes to circular economy principles by promoting reuse and reducing waste, aligning with AIT's sustainability mission.
+
+This comprehensive report details all aspects of the project including background, purpose, products and services, e-business strategy, business and revenue models, target customers, competitive analysis, investment requirements, financial projections, technical infrastructure, human resource needs, payment and delivery methods, and detailed website implementation. The analysis is supported by relevant academic literature on e-commerce platforms, C2C marketplaces, sustainable consumption, and campus-based digital solutions.
+
+**Keywords:** E-commerce, C2C Marketplace, Second-hand Trading, Campus Platform, Sustainable Consumption, Barter System, E-Business Model
+
+---
+
+## Executive Summary
+
+This report presents a comprehensive analysis of the development and implementation of a second-hand marketplace platform designed exclusively for the Asian Institute of Technology (AIT) student community. The platform addresses critical challenges faced by students in acquiring and disposing of essential items while promoting sustainability, economic efficiency, and community engagement. The system implements a Consumer-to-Consumer (C2C) e-commerce model with unique features including barter trading, integrated messaging, and community forums, all operating within a secure, campus-restricted environment.
+
+The platform leverages modern web technologies including Next.js for the frontend and Django REST Framework for the backend, creating a scalable and maintainable solution. The business model follows a freemium approach, ensuring accessibility while generating sustainable revenue through premium memberships and featured listings. Financial projections indicate break-even achievement in Year 2, with profitability established by Year 3.
+
+This report comprehensively details the project's background, purpose, products and services, e-business strategy, business and revenue models, target customers, competitive analysis, investment requirements, financial projections, technical infrastructure, human resource needs, payment and delivery methods, and detailed website implementation. The analysis is supported by relevant academic literature on e-commerce, C2C marketplaces, sustainable consumption, and campus-based platforms.
+
+---
+
+## 1. Background
+
+### 1.1 Institutional Context
+
+The Asian Institute of Technology (AIT), established in 1959, is a leading international postgraduate institution located in Pathum Thani, Thailand (www.ait.ac.th). AIT hosts a diverse international student community representing over 40 countries, with the majority residing on campus throughout their academic programs. The institution offers programs in engineering, technology, management, and environmental studies, attracting students who typically stay for 1-2 years for master's degrees or 3-4 years for doctoral programs.
+
+### 1.2 Problem Statement
+
+Throughout their academic journey, AIT students face several significant challenges related to acquiring and managing personal belongings:
+
+**1.2.1 Disposal Challenges for Graduating Students**
+Graduating or departing students frequently struggle with disposing of usable items such as furniture, electronics, study materials, and household appliances. These items, while still functional, often end up discarded due to lack of convenient disposal channels, contributing to environmental waste.
+
+**1.2.2 High Initial Costs for New Students**
+Incoming students face substantial financial burdens when acquiring essential living items. Purchasing new furniture, appliances, textbooks, and daily necessities in a single transaction creates significant economic pressure, particularly for international students managing currency exchange and limited budgets.
+
+**1.2.3 Language and Cultural Barriers**
+International students encounter difficulties accessing local second-hand markets due to language barriers and unfamiliarity with local trading practices. This limitation restricts their ability to find affordable alternatives to new purchases.
+
+**1.2.4 Sustainability Concerns**
+The current system results in unnecessary waste generation, as usable items are discarded rather than reused. This contradicts AIT's commitment to sustainability and environmental responsibility, which is a core value of the institution.
+
+**1.2.5 Lack of Centralized Trading Platform**
+Existing solutions rely on informal channels such as social media groups, WhatsApp messaging, and word-of-mouth, which lack structure, security, and discoverability. There is no dedicated platform that facilitates safe, organized trading within the AIT community.
+
+### 1.3 Market Opportunity
+
+Research indicates that second-hand C2C e-commerce platforms have experienced significant growth, particularly following the COVID-19 pandemic (Wang & Sun, 2023). Studies on consumer behavior in online marketplaces reveal that trust and security are critical factors influencing platform adoption (Rachbini et al., 2019). Campus-based marketplaces have demonstrated success in creating secure trading environments for student communities, addressing the unique needs of university populations (Ismail et al., 2020; Jafri et al., 2025). The AIT marketplace addresses a clear market need within a well-defined, captive audience of approximately 2,000+ students, faculty, and staff members, leveraging the benefits of a closed, trusted community environment.
+
+---
+
+## 2. Purpose
+
+### 2.1 Primary Objective
+
+To establish an efficient, secure, and user-friendly second-hand goods trading platform exclusively for the AIT student community, reducing students' financial burden while promoting sustainability and supporting cultural inclusion.
+
+### 2.2 Key Objectives
+
+**2.2.1 Economic Support**
+- Lower students' living costs by facilitating access to affordable second-hand items
+- Enable students to monetize unwanted items, generating supplementary income
+- Reduce the financial burden on new students entering the AIT community
+
+**2.2.2 Security Assurance**
+- Provide a trustworthy trading environment restricted to verified AIT community members
+- Implement user authentication using AIT email addresses (@ait.ac.th or @ait.asia)
+- Create a safe space for transactions within the campus community
+
+**2.2.3 Environmental Consideration**
+- Reduce waste through reuse and promote sustainable consumption practices, contributing to circular economy principles (Castellani et al., 2015; D'Adamo et al., 2022)
+- Extend the lifecycle of products, minimizing environmental impact and resource consumption
+- Align with AIT's sustainability mission and values, supporting institutional environmental goals
+
+**2.2.4 Cultural Support**
+- Facilitate participation by international students through multilingual features
+- Bridge language and cultural barriers that prevent access to local markets
+- Create an inclusive platform that serves the diverse AIT community
+
+**2.2.5 Community Building**
+- Foster connections between students through trading interactions
+- Create a sense of community through forums and communication features
+- Support the AIT student union's mission of enhancing student life
+
+---
+
+## 3. Products and Services
+
+### 3.1 Core Services
+
+**3.1.1 Item Listing and Management**
+Users can create, edit, and manage listings for items they wish to sell. Each listing includes:
+- Item title, description, and multiple images
+- Price (optional, supporting negotiable pricing)
+- Category classification
+- Condition rating (New, Like New, Good, Fair, Poor)
+- Location information
+- Contact details
+- Availability status
+
+**3.1.2 Barter Trading System**
+A unique feature allowing users to exchange items without monetary transactions:
+- Items can be listed as "barter only" (no price required)
+- Items with prices can also allow barter exchanges
+- Users specify desired items in exchange
+- Facilitates sustainable trading and accommodates students with limited cash flow
+
+**3.1.3 Search and Discovery**
+- Advanced search functionality with category filters
+- Keyword-based search across titles and descriptions
+- Featured items section for premium members
+- Latest items feed for real-time discovery
+
+**3.1.4 Wanted Items Posting**
+Users can post items they are seeking to purchase:
+- Specify desired items with descriptions
+- Set maximum price willing to pay
+- Condition preferences
+- Enables reverse marketplace functionality
+
+**3.1.5 Shopping Cart and Wishlist**
+- Cart functionality for managing multiple items of interest
+- Wishlist for saving items for future consideration
+- Easy comparison and organization of potential purchases
+
+**3.1.6 Integrated Messaging System**
+- Private, secure messaging functionality between buyers and sellers
+- Conversation-based interface with message threading and grouping
+- Item-contextual messaging (messages can be associated with specific listings)
+- Privacy-enforced access control ensuring users can only view their own conversations
+- Message history persistence with chronological organization
+- Real-time message updates through polling mechanism (10-second intervals)
+- Integration with item detail pages enabling direct seller contact
+- Eliminates need for external communication channels
+
+**3.1.7 Order Management**
+- Order creation and tracking
+- Status updates (pending, confirmed, completed, cancelled)
+- Transaction history for both buyers and sellers
+- Record keeping for completed trades
+
+**3.1.8 Community Forum**
+- Discussion boards for community engagement
+- Category-specific forums
+- Knowledge sharing and community support
+- Enhanced user engagement beyond transactions
+
+**3.1.9 Notification System**
+- Real-time notifications for messages, orders, and interactions
+- Email notifications for important updates
+- In-app notification center
+- Keeps users informed of platform activity
+
+**3.1.10 Administrative Dashboard**
+- Comprehensive admin panel for platform management
+- User management and moderation
+- Statistics and analytics
+- Content moderation tools
+- System monitoring and maintenance
+
+### 3.2 Premium Features (Membership-Based)
+
+**3.2.1 Featured Listings**
+Premium members can feature their items on the homepage and featured items page, increasing visibility and potential sales.
+
+**3.2.2 Enhanced Statistics**
+Access to detailed analytics about listing performance, views, and engagement metrics.
+
+**3.2.3 Priority Support**
+Faster response times for customer support and technical assistance.
+
+---
+
+## 4. E-Business Strategy
+
+### 4.1 Strategic Positioning
+
+The AIT Marketplace positions itself as a **community-first, sustainability-focused C2C trading platform** specifically designed for the AIT student community. Unlike general-purpose marketplaces, this platform leverages the unique characteristics of a closed, trusted community.
+
+### 4.2 Competitive Advantages
+
+**4.2.1 Community Trust**
+- Restricted access to verified AIT community members creates inherent trust
+- Campus-based transactions reduce fraud risk
+- Face-to-face transactions enable product inspection before purchase
+
+**4.2.2 Specialized Features**
+- Barter system unique to campus marketplaces
+- Integration with AIT email system for authentication
+- Community forum for engagement beyond transactions
+
+**4.2.3 Sustainability Focus**
+- Explicit environmental mission resonates with AIT values
+- Promotes circular economy principles
+- Reduces waste within the campus community
+
+**4.2.4 Cost Efficiency**
+- No transaction fees for basic users
+- Low-cost membership options for premium features
+- Eliminates need for shipping and payment processing infrastructure
+
+### 4.3 Market Entry Strategy
+
+**Phase 1: Launch and Initial Adoption (Months 1-3)**
+- Soft launch with beta testing among student union members
+- Word-of-mouth marketing through student organizations
+- Social media promotion on AIT community pages
+- Incentives for early adopters (free premium membership for first 100 users)
+
+**Phase 2: Growth and Engagement (Months 4-6)**
+- Integration with AIT orientation programs for new students
+- Partnership with student clubs and organizations
+- Regular promotional campaigns and featured listings
+- Community events and trading fairs
+
+**Phase 3: Optimization and Expansion (Months 7-12)**
+- Feature enhancements based on user feedback
+- Expansion to include faculty and staff
+- Integration with AIT sustainability initiatives
+- Analytics-driven optimization
+
+### 4.4 User Acquisition Strategy
+
+**4.4.1 Organic Growth**
+- Leverage existing AIT communication channels
+- Student union endorsement and promotion
+- Integration with new student orientation
+- Success stories and testimonials
+
+**4.4.2 Community Engagement**
+- Regular platform updates and new features
+- User-generated content through forums
+- Recognition programs for active users
+- Community events and meetups
+
+**4.4.3 Retention Strategy**
+- Excellent user experience and platform reliability
+- Responsive customer support
+- Regular feature updates based on feedback
+- Community building through forums and interactions
+
+---
+
+## 5. E-Business Model and Revenue Model
+
+### 5.1 E-Business Model Classification
+
+The AIT Marketplace operates as a **Consumer-to-Consumer (C2C) E-Marketplace** with platform intermediary characteristics. This model is well-established in the e-commerce literature and has proven successful for second-hand goods trading (Wang & Sun, 2023). Research on e-business models in online marketplaces indicates that product innovation, infrastructure management, and customer relationship management significantly influence customer purchasing decisions (Karlina et al., 2019). The platform's design incorporates these elements to create value for both buyers and sellers within the AIT community.
+
+**5.1.1 Platform Model Characteristics**
+- **Multi-sided Platform**: Connects buyers and sellers within the AIT community
+- **Network Effects**: Value increases with more users and listings
+- **Community Governance**: Platform rules and moderation ensure quality
+- **Value Creation**: Facilitates transactions that would not occur otherwise
+
+**5.1.2 Transaction Model**
+- **Listing-Based**: Sellers create listings, buyers browse and contact
+- **Direct Communication**: Buyers and sellers communicate directly through platform messaging
+- **Face-to-Face Completion**: Transactions completed in person, no online payment processing
+- **Trust-Based**: Relies on community trust and verification
+
+### 5.2 Revenue Model
+
+**5.2.1 Primary Revenue Streams**
+
+**A. Premium Membership Subscriptions**
+- **Basic Membership**: Free (default for all users)
+- **Premium Membership**: THB 299/month or THB 2,990/year
+  - Featured listings on homepage
+  - Enhanced statistics and analytics
+  - Priority customer support
+  - Ad-free experience
+  - Early access to new features
+
+**B. Featured Listing Fees**
+- One-time fee of THB 99 per item for featured placement
+- Items featured for 7 days on homepage and featured page
+- Available to both free and premium members
+
+**C. Advertisement Revenue (Future)**
+- Sponsored listings from external vendors (subject to AIT approval)
+- Banner advertisements on platform pages
+- Category-specific advertising opportunities
+
+**5.2.2 Revenue Projections**
+
+**Year 1 Projections:**
+- Target users: 500 active users (25% of AIT student population)
+- Premium members: 50 users (10% conversion rate)
+  - Monthly revenue: 50 × THB 299 = THB 14,950/month
+  - Annual revenue: THB 179,400/year
+- Featured listings: 20 listings/month × THB 99 = THB 1,980/month
+  - Annual revenue: THB 23,760/year
+- **Total Year 1 Revenue: THB 203,160 (approximately USD 5,500)**
+
+**Year 2 Projections:**
+- Target users: 1,000 active users (50% of AIT student population)
+- Premium members: 150 users (15% conversion rate)
+  - Annual revenue: THB 538,200/year
+- Featured listings: 50 listings/month × THB 99 = THB 4,950/month
+  - Annual revenue: THB 59,400/year
+- **Total Year 2 Revenue: THB 597,600 (approximately USD 16,200)**
+
+**5.2.3 Revenue Model Justification**
+
+The freemium model with premium features is appropriate for a campus marketplace because:
+- Low barrier to entry encourages platform adoption, which is critical for network effects in multi-sided platforms (Parodos et al., 2022)
+- Premium features provide value without excluding basic users, following successful freemium strategies in digital platforms
+- Sustainable revenue without transaction fees maintains user trust, which is essential for C2C marketplaces (Rachbini et al., 2019)
+- Aligns with student budget constraints while offering optional enhancements, ensuring accessibility while generating revenue
+
+---
+
+## 6. Target Customers/Users
+
+### 6.1 Primary Target Market
+
+**6.1.1 AIT Students**
+- **Graduate Students (Master's)**: 1,200-1,500 students
+  - Typically stay 1-2 years
+  - High turnover creates constant demand for buying and selling
+  - International students benefit from multilingual platform
+- **Doctoral Students**: 300-400 students
+  - Longer stays (3-4 years) but still experience transitions
+  - May accumulate more items over time
+- **Exchange Students**: 100-200 students per semester
+  - Short-term stays create frequent buying/selling needs
+  - High mobility requires flexible trading solutions
+
+**6.1.2 User Personas**
+
+**Persona 1: Incoming International Student (Buyer)**
+- Age: 22-28
+- Needs: Furniture, appliances, study materials, daily necessities
+- Pain Points: High costs, language barriers, unfamiliarity with local markets
+- Platform Value: Affordable items, English interface, campus community trust
+
+**Persona 2: Graduating Student (Seller)**
+- Age: 24-30
+- Needs: Dispose of items before departure
+- Pain Points: Limited time, disposal challenges, want to recover some value
+- Platform Value: Easy listing, guaranteed audience, quick transactions
+
+**Persona 3: Active Trader (Both Buyer and Seller)**
+- Age: 23-27
+- Needs: Regular trading, upgrading items, finding deals
+- Pain Points: Need efficient platform, want to save money
+- Platform Value: Barter system, wishlist, search functionality, community engagement
+
+**Persona 4: Budget-Conscious Student (Buyer)**
+- Age: 22-26
+- Needs: Essential items at lowest cost
+- Pain Points: Limited budget, need reliable items
+- Platform Value: Negotiable prices, condition ratings, direct seller contact
+
+### 6.2 Secondary Target Market
+
+**6.2.1 AIT Faculty and Staff (Future Expansion)**
+- Potential user base of 200-300 members
+- Similar needs for office furniture, electronics, and household items
+- Higher purchasing power may support premium features
+
+**6.2.2 AIT Alumni (Future Consideration)**
+- May wish to sell items to current students
+- Could provide mentorship opportunities through forums
+- Limited access model to maintain community focus
+
+### 6.3 User Segmentation
+
+**6.3.1 By Usage Frequency**
+- **Heavy Users** (20%): Active traders, frequent buyers/sellers, forum participants
+- **Moderate Users** (40%): Occasional buyers or sellers, seasonal activity
+- **Light Users** (40%): One-time or infrequent transactions
+
+**6.3.2 By Transaction Type**
+- **Buyers Only** (30%): Primarily seeking to purchase items
+- **Sellers Only** (20%): Primarily listing items for sale
+- **Both** (50%): Engage in both buying and selling activities
+
+---
+
+## 7. Existing/Potential Competitors
+
+### 7.1 Direct Competitors
+
+**7.1.1 Facebook Marketplace and Groups**
+- **Strengths**: Large user base, no fees, familiar interface
+- **Weaknesses**: 
+  - Not restricted to AIT community (security concerns)
+  - No specialized features for barter or campus trading
+  - Cluttered interface with irrelevant listings
+  - No integrated messaging or order management
+- **Competitive Advantage**: Our platform offers AIT-exclusive access, specialized features, and better organization
+
+**7.1.2 WhatsApp/Telegram Groups**
+- **Strengths**: Immediate communication, no platform fees
+- **Weaknesses**:
+  - No search functionality
+  - Limited organization and categorization
+  - Messages get lost in chat history
+  - No user profiles or ratings
+  - Difficult to track transactions
+- **Competitive Advantage**: Structured platform with search, categories, profiles, and transaction tracking
+
+**7.1.3 Local Second-Hand Markets (Physical)**
+- **Strengths**: Ability to inspect items, immediate transactions
+- **Weaknesses**:
+  - Language barriers for international students
+  - Inconvenient location and timing
+  - Limited selection
+  - No price comparison
+- **Competitive Advantage**: 24/7 accessibility, English interface, campus convenience, larger selection
+
+### 7.2 Indirect Competitors
+
+**7.2.1 General E-Commerce Platforms (Lazada, Shopee)**
+- Focus on new products, not second-hand
+- Shipping required (not suitable for large items)
+- Transaction fees
+- Not community-focused
+- **Our Advantage**: Campus-specific, face-to-face, no shipping, community trust
+
+**7.2.2 University-Specific Platforms (Other Institutions)**
+- Limited to their own communities
+- Not accessible to AIT students
+- **Our Advantage**: First-mover advantage within AIT, tailored to AIT needs
+
+### 7.3 Competitive Positioning
+
+The AIT Marketplace differentiates itself through:
+
+1. **Exclusive Community Access**: Only AIT members can participate, ensuring trust and security
+2. **Specialized Features**: Barter system, wanted items, community forums
+3. **Campus Integration**: Uses AIT email authentication, aligns with AIT values
+4. **Sustainability Focus**: Explicit environmental mission
+5. **User Experience**: Modern, intuitive interface designed for students
+6. **No Transaction Fees**: Unlike many platforms, basic trading is free
+7. **Face-to-Face Model**: Enables inspection and reduces fraud risk
+
+### 7.4 Barriers to Entry
+
+**7.4.1 For New Competitors**
+- First-mover advantage within AIT community
+- Network effects: more users = more value
+- Student union endorsement and integration
+- Established user base and transaction history
+- Brand recognition within AIT community
+
+**7.4.2 Defensive Strategies**
+- Continuous feature improvements based on user feedback
+- Strong community engagement and retention
+- Partnerships with student organizations
+- Regular platform updates and maintenance
+- Responsive customer support
+
+---
+
+## 8. Investment Required
+
+### 8.1 Development Costs
+
+**8.1.1 Initial Development**
+- Backend development (Django): 200 hours × THB 500/hour = THB 100,000
+- Frontend development (Next.js): 180 hours × THB 500/hour = THB 90,000
+- Database design and implementation: 40 hours × THB 500/hour = THB 20,000
+- UI/UX design: 60 hours × THB 500/hour = THB 30,000
+- Testing and quality assurance: 80 hours × THB 400/hour = THB 32,000
+- Project management: 40 hours × THB 600/hour = THB 24,000
+- **Subtotal: THB 296,000 (approximately USD 8,000)**
+
+**8.1.2 Infrastructure Setup**
+- Server configuration and deployment: 20 hours × THB 500/hour = THB 10,000
+- Domain registration and SSL certificates: THB 2,000/year
+- Initial security audit: THB 15,000
+- **Subtotal: THB 27,000**
+
+**Total Development Investment: THB 323,000 (approximately USD 8,750)**
+
+### 8.2 Operational Costs (Annual)
+
+**8.2.1 Hosting and Infrastructure**
+- Cloud hosting (AWS/DigitalOcean): THB 3,000/month × 12 = THB 36,000/year
+- Database hosting: THB 1,500/month × 12 = THB 18,000/year
+- CDN and storage: THB 1,000/month × 12 = THB 12,000/year
+- Backup and disaster recovery: THB 500/month × 12 = THB 6,000/year
+- **Subtotal: THB 72,000/year**
+
+**8.2.2 Software and Services**
+- Domain renewal: THB 500/year
+- SSL certificate renewal: THB 2,000/year
+- Email service (SendGrid/Mailgun): THB 1,200/month × 12 = THB 14,400/year
+- Monitoring and analytics tools: THB 800/month × 12 = THB 9,600/year
+- **Subtotal: THB 26,500/year**
+
+**8.2.3 Maintenance and Support**
+- Bug fixes and updates: 20 hours/month × THB 500/hour × 12 = THB 120,000/year
+- Feature enhancements: 10 hours/month × THB 500/hour × 12 = THB 60,000/year
+- Security updates and patches: 5 hours/month × THB 500/hour × 12 = THB 30,000/year
+- **Subtotal: THB 210,000/year**
+
+**8.2.4 Marketing and Promotion**
+- Social media marketing: THB 3,000/month × 12 = THB 36,000/year
+- Promotional materials and events: THB 24,000/year
+- **Subtotal: THB 60,000/year**
+
+**8.2.5 Administrative Costs**
+- Customer support (part-time): 10 hours/week × THB 300/hour × 52 = THB 156,000/year
+- Content moderation: 5 hours/week × THB 300/hour × 52 = THB 78,000/year
+- **Subtotal: THB 234,000/year**
+
+**Total Annual Operational Costs: THB 602,500 (approximately USD 16,300)**
+
+### 8.3 Total Investment Summary
+
+**Year 1 Total Investment:**
+- Development: THB 323,000
+- Operations: THB 602,500
+- **Total: THB 925,500 (approximately USD 25,000)**
+
+**Year 2 Total Investment:**
+- Operations: THB 602,500
+- Minor enhancements: THB 50,000
+- **Total: THB 652,500 (approximately USD 17,650)**
+
+### 8.4 Funding Sources
+
+**8.4.1 Initial Funding Options**
+- AIT Student Union budget allocation
+- AIT administration support (sustainability initiative)
+- Grants for sustainability projects
+- Sponsorship from AIT alumni or corporate partners
+
+**8.4.2 Self-Sustainability Timeline**
+- Break-even point: Month 18-24 (based on revenue projections)
+- Self-sustaining: Year 3 onwards
+- Potential for surplus revenue to fund enhancements and expansion
+
+---
+
+## 9. Projected Revenues and Expenses
+
+### 9.1 Revenue Projections (3-Year Forecast)
+
+**Year 1 (Months 1-12)**
+- Premium Memberships: THB 179,400
+- Featured Listings: THB 23,760
+- **Total Revenue: THB 203,160**
+- **Operating Expenses: THB 602,500**
+- **Net Loss: -THB 399,340**
+
+*Note: Year 1 focuses on user acquisition and platform establishment. Losses are expected and acceptable for a startup platform.*
+
+**Year 2 (Months 13-24)**
+- Premium Memberships: THB 538,200
+- Featured Listings: THB 59,400
+- Potential Advertisement Revenue: THB 50,000
+- **Total Revenue: THB 647,600**
+- **Operating Expenses: THB 602,500**
+- **Net Profit: THB 45,100**
+
+**Year 3 (Months 25-36)**
+- Premium Memberships: THB 897,000 (assuming 300 premium members)
+- Featured Listings: THB 118,800 (100 listings/month)
+- Advertisement Revenue: THB 150,000
+- **Total Revenue: THB 1,165,800**
+- **Operating Expenses: THB 650,000 (slight increase for growth)**
+- **Net Profit: THB 515,800**
+
+### 9.2 Expense Breakdown (Annual)
+
+**Fixed Costs:**
+- Hosting and Infrastructure: THB 72,000
+- Software and Services: THB 26,500
+- Marketing: THB 60,000
+- **Subtotal: THB 158,500**
+
+**Variable Costs (User-Dependent):**
+- Maintenance and Support: THB 210,000
+- Administrative: THB 234,000
+- **Subtotal: THB 444,000**
+
+**Total Annual Operating Expenses: THB 602,500**
+
+### 9.3 Key Financial Metrics
+
+**Year 1:**
+- Revenue per User: THB 406 (THB 203,160 / 500 users)
+- Cost per User: THB 1,205 (THB 602,500 / 500 users)
+- Premium Conversion Rate: 10% (50/500)
+
+**Year 2:**
+- Revenue per User: THB 648 (THB 647,600 / 1,000 users)
+- Cost per User: THB 603 (THB 602,500 / 1,000 users)
+- Premium Conversion Rate: 15% (150/1,000)
+- **Break-even achieved**
+
+**Year 3:**
+- Revenue per User: THB 777 (THB 1,165,800 / 1,500 users)
+- Cost per User: THB 433 (THB 650,000 / 1,500 users)
+- Premium Conversion Rate: 20% (300/1,500)
+- **Profitability established**
+
+### 9.4 Financial Assumptions
+
+1. User growth: 500 → 1,000 → 1,500 over 3 years
+2. Premium conversion: 10% → 15% → 20% (improving with platform value)
+3. Featured listings: 20 → 50 → 100 per month (increasing with user base)
+4. Operating costs remain relatively stable with economies of scale
+5. No major infrastructure upgrades required in first 3 years
+6. Advertisement revenue begins in Year 2 with AIT approval
+
+### 9.5 Risk Factors and Mitigation
+
+**Revenue Risks:**
+- Lower than expected user adoption → Enhanced marketing and partnerships
+- Lower premium conversion → Improved premium feature value proposition
+- Competition from free alternatives → Emphasize unique AIT-exclusive features
+
+**Cost Risks:**
+- Higher than expected hosting costs → Optimize infrastructure, consider cost-effective alternatives
+- Increased support needs → Implement self-service features, comprehensive documentation
+- Security incidents → Proactive security measures, regular audits
+
+---
+
+## 10. Technical Infrastructure
+
+### 10.1 System Architecture
+
+**10.1.1 Overall Architecture**
+The platform follows a **modern three-tier architecture** with clear separation of concerns:
+
+```
+┌─────────────────────────────────────────┐
+│         Frontend (Next.js)              │
+│     - React Components                  │
+│     - Client-side Routing               │
+│     - State Management                 │
+└──────────────┬──────────────────────────┘
+               │ REST API
+┌──────────────▼──────────────────────────┐
+│      Backend (Django REST Framework)    │
+│     - Business Logic                   │
+│     - API Endpoints                     │
+│     - Authentication & Authorization    │
+└──────────────┬──────────────────────────┘
+               │
+┌──────────────▼──────────────────────────┐
+│      Database (PostgreSQL/SQLite)       │
+│     - Data Persistence                 │
+│     - Transaction Management           │
+└─────────────────────────────────────────┘
+```
+
+**10.1.2 Technology Stack**
+
+**Frontend:**
+- **Framework**: Next.js 14.2.3 (React-based)
+- **Language**: TypeScript 5.9.3
+- **Styling**: Tailwind CSS 3.4.3
+- **UI Components**: Headless UI, Lucide React icons
+- **Animations**: Framer Motion
+- **Internationalization**: next-intl 4.4.0
+- **State Management**: React Hooks and Context API
+
+**Backend:**
+- **Framework**: Django 4.2+ with Django REST Framework 3.14+
+- **Language**: Python 3.10+
+- **Authentication**: JWT (JSON Web Tokens) via djangorestframework-simplejwt
+- **Database**: 
+  - Development: SQLite3
+  - Production: PostgreSQL (via psycopg2-binary)
+- **Real-time Features**: Django Channels 4.0+ with Redis
+- **Task Queue**: Celery 5.3.0 with Redis
+- **Image Processing**: Pillow 10.0+
+- **CORS**: django-cors-headers 4.4+
+
+**Infrastructure:**
+- **Web Server**: Gunicorn (production) / Django development server (development)
+- **Reverse Proxy**: Nginx (production)
+- **Containerization**: Docker and Docker Compose
+- **Version Control**: Git
+- **CI/CD**: GitHub Actions (recommended)
+
+### 10.2 Database Design
+
+**10.2.1 Core Models**
+
+**User Model:**
+- Custom user model extending Django's AbstractUser
+- AIT email validation (@ait.ac.th or @ait.asia)
+- Profile information (first name, last name, phone, address)
+- Membership status (basic/premium)
+- Account creation and last login timestamps
+
+**Item Model:**
+- Owner (ForeignKey to User)
+- Title, description, price (nullable for barter items)
+- Category (ForeignKey to Category model)
+- Multiple images (JSONField for image URLs)
+- Condition rating (New, Like New, Good, Fair, Poor)
+- Availability status
+- Barter flags (is_barter, allow_barter)
+- Featured status (premium feature)
+- Location and contact information
+- Timestamps (created_at, updated_at)
+
+**Category Model:**
+- Hierarchical category structure
+- Name, description, parent category
+- Icon/image support
+- Active status
+
+**Order Model:**
+- Buyer and seller (ForeignKeys to User)
+- Order items (ManyToMany through OrderItem)
+- Status (pending, confirmed, completed, cancelled)
+- Total amount
+- Timestamps
+
+**Barter Model:**
+- Initiator and recipient (ForeignKeys to User)
+- Items involved (ForeignKeys to Item)
+- Status (pending, accepted, rejected, completed)
+- Messages/negotiations
+- Timestamps
+
+**Chat/Message Model:**
+- Sender and receiver (ForeignKeys to User with related_name attributes for bidirectional querying)
+- Related item (optional ForeignKey with SET_NULL on delete to preserve message history)
+- Message content (TextField for variable-length messages)
+- Timestamps (auto-managed created_at field with descending order)
+- Privacy-enforced queryset filtering (users can only access their own conversations)
+- Automatic sender assignment through perform_create() method for security
+
+**Wishlist Model:**
+- User (ForeignKey)
+- Items (ManyToMany through WishlistItem)
+- Public/private settings
+
+**Wanted Item Model:**
+- User (ForeignKey)
+- Title, description
+- Maximum price willing to pay
+- Category and condition preferences
+- Active status
+- Timestamps
+
+**Forum Model:**
+- User (ForeignKey - author)
+- Title, content
+- Category/topic
+- Replies (self-referential ForeignKey)
+- Timestamps
+
+**Notification Model:**
+- User (ForeignKey - recipient)
+- Type (message, order, system)
+- Content
+- Read status
+- Link/action URL
+- Timestamps
+
+### 10.3 API Architecture
+
+**10.3.1 RESTful API Design**
+
+The backend exposes a comprehensive REST API following REST principles:
+
+**Authentication Endpoints:**
+- `POST /api/users/register/` - User registration
+- `POST /api/users/token/` - JWT token obtain
+- `POST /api/users/token/refresh/` - JWT token refresh
+- `GET/PUT /api/users/profile/` - User profile management
+
+**Item Endpoints:**
+- `GET /api/items/` - List all items (with filters)
+- `POST /api/items/` - Create new item
+- `GET /api/items/{id}/` - Get item details
+- `PUT /api/items/{id}/` - Update item
+- `DELETE /api/items/{id}/` - Delete item
+
+**Barter Endpoints:**
+- `GET /api/barter/` - List barter proposals
+- `POST /api/barter/` - Create barter proposal
+- `PUT /api/barter/{id}/` - Update barter status
+
+**Chat Endpoints:**
+- `GET /api/chat/messages/` - List messages
+- `POST /api/chat/messages/` - Send message
+
+**Order Endpoints:**
+- `GET /api/orders/` - List orders
+- `POST /api/orders/` - Create order
+- `PUT /api/orders/{id}/` - Update order status
+
+**Additional Endpoints:**
+- Categories, Cart, Wishlist, Search, Wanted Items, Forum, Notifications, Statistics, Admin Panel
+
+**10.3.2 Authentication and Security**
+
+- **JWT Authentication**: Secure token-based authentication
+- **CORS Configuration**: Restricted to allowed origins
+- **CSRF Protection**: Django's built-in CSRF protection
+- **Password Hashing**: Django's PBKDF2 password hasher
+- **Input Validation**: Django model validation and serializer validation
+- **SQL Injection Prevention**: Django ORM parameterized queries
+- **XSS Prevention**: Django template auto-escaping
+
+### 10.4 Frontend Architecture
+
+**10.4.1 Component Structure**
+
+```
+frontend/
+├── app/                    # Next.js App Router pages
+│   ├── page.tsx           # Homepage
+│   ├── items/             # Item listing and detail pages
+│   ├── barter/            # Barter pages
+│   ├── chat/              # Messaging interface
+│   ├── cart/              # Shopping cart
+│   ├── wishlist/          # Wishlist
+│   ├── wanted/            # Wanted items
+│   ├── forum/             # Community forum
+│   ├── login/             # Authentication
+│   └── personal/          # User profile
+├── components/            # Reusable React components
+│   ├── Header.tsx
+│   ├── Footer.tsx
+│   ├── ItemCard.tsx
+│   ├── Button.tsx
+│   └── ...
+├── lib/                   # Utility functions
+│   ├── api.ts            # API client
+│   └── errorHandler.ts   # Error handling
+└── i18n/                  # Internationalization
+    └── en.ts             # English translations
+```
+
+**10.4.2 State Management**
+
+- **Server State**: React Query or SWR for API data fetching
+- **Client State**: React Context API and useState hooks
+- **Form State**: Controlled components with React hooks
+- **Authentication State**: Context provider (AuthProvider)
+
+**10.4.3 Routing**
+
+- Next.js App Router for file-based routing
+- Protected routes using middleware
+- Dynamic routes for item details (`/items/[id]`)
+- Internationalization routing support
+
+### 10.5 Deployment Architecture
+
+**10.5.1 Development Environment**
+- Local development servers
+- SQLite database
+- Hot-reload for both frontend and backend
+- Development tools and debugging
+
+**10.5.2 Production Environment**
+
+**Option 1: Cloud Hosting (Recommended)**
+- **Frontend**: Vercel or Netlify (optimized for Next.js)
+- **Backend**: AWS EC2, DigitalOcean Droplet, or Heroku
+- **Database**: AWS RDS PostgreSQL or managed PostgreSQL service
+- **Redis**: AWS ElastiCache or managed Redis service
+- **Storage**: AWS S3 or similar for image storage
+- **CDN**: CloudFront or Cloudflare for static assets
+
+**Option 2: On-Premise (AIT Infrastructure)**
+- AIT server infrastructure
+- Self-managed PostgreSQL database
+- Self-managed Redis instance
+- Nginx reverse proxy
+- SSL certificates via Let's Encrypt
+
+**10.5.3 Containerization**
+
+Docker and Docker Compose configuration for:
+- Consistent development and production environments
+- Easy deployment and scaling
+- Dependency management
+- Isolation of services
+
+### 10.6 Security Measures
+
+**10.6.1 Authentication Security**
+- JWT tokens with expiration
+- Secure password storage (hashed, never plaintext)
+- Email verification for account creation
+- AIT email domain validation
+
+**10.6.2 Data Security**
+- HTTPS encryption for all communications
+- SQL injection prevention via ORM
+- XSS prevention via React's built-in escaping
+- CSRF protection
+- Input sanitization and validation
+
+**10.6.3 Access Control**
+- Role-based access control (admin, premium user, basic user)
+- Resource-level permissions
+- API rate limiting
+- Secure file upload handling
+
+**10.6.4 Monitoring and Logging**
+- Error tracking and logging
+- User activity logging (privacy-compliant)
+- Security event monitoring
+- Regular security audits
+
+### 10.7 Scalability Considerations
+
+**10.7.1 Database Optimization**
+- Indexed fields for common queries
+- Database query optimization
+- Connection pooling
+- Read replicas for scaling (future)
+
+**10.7.2 Caching Strategy**
+- Redis caching for frequently accessed data
+- CDN caching for static assets
+- Browser caching for static resources
+- API response caching where appropriate
+
+**10.7.3 Load Handling**
+- Horizontal scaling capability
+- Asynchronous task processing (Celery)
+- Database connection pooling
+- Efficient image handling and optimization
+
+---
+
+## 11. Human Resources Needed
+
+### 11.1 Development Team
+
+**11.1.1 Core Development Team (Initial)**
+
+**Backend Developer (1 Full-Time Equivalent)**
+- Responsibilities: Django API development, database design, authentication systems
+- Skills: Python, Django, REST APIs, PostgreSQL, JWT authentication
+- Time Commitment: 6 months full-time for initial development
+- Cost: THB 50,000/month × 6 = THB 300,000
+
+**Frontend Developer (1 Full-Time Equivalent)**
+- Responsibilities: Next.js development, UI/UX implementation, responsive design
+- Skills: React, Next.js, TypeScript, Tailwind CSS, responsive design
+- Time Commitment: 6 months full-time for initial development
+- Cost: THB 50,000/month × 6 = THB 300,000
+
+**Full-Stack Developer (0.5 FTE)**
+- Responsibilities: Integration, testing, deployment, feature development
+- Skills: Full-stack development, DevOps, testing
+- Time Commitment: 3 months part-time
+- Cost: THB 25,000/month × 3 = THB 75,000
+
+**UI/UX Designer (0.25 FTE)**
+- Responsibilities: User interface design, user experience optimization, branding
+- Skills: Figma, Adobe XD, user research, design systems
+- Time Commitment: 1.5 months part-time
+- Cost: THB 20,000/month × 1.5 = THB 30,000
+
+**Total Initial Development Team Cost: THB 705,000**
+
+**11.1.2 Ongoing Development Team (Post-Launch)**
+
+**Maintenance Developer (0.5 FTE)**
+- Responsibilities: Bug fixes, security updates, minor enhancements
+- Skills: Full-stack development, debugging, system maintenance
+- Time Commitment: Ongoing, 20 hours/month
+- Cost: THB 10,000/month × 12 = THB 120,000/year
+
+**Feature Development (0.25 FTE)**
+- Responsibilities: New feature development, user-requested enhancements
+- Skills: Full-stack development, feature planning
+- Time Commitment: Ongoing, 10 hours/month
+- Cost: THB 5,000/month × 12 = THB 60,000/year
+
+**Total Ongoing Development Cost: THB 180,000/year**
+
+### 11.2 Operations Team
+
+**11.2.1 Customer Support (Part-Time)**
+- **Role**: Customer Support Representative
+- **Responsibilities**: 
+  - Respond to user inquiries and support requests
+  - Assist with account issues
+  - Provide platform usage guidance
+  - Escalate technical issues to development team
+- **Skills**: Communication, problem-solving, platform knowledge
+- **Time Commitment**: 10 hours/week
+- **Cost**: THB 300/hour × 10 hours/week × 52 weeks = THB 156,000/year
+
+**11.2.2 Content Moderator (Part-Time)**
+- **Role**: Content Moderator
+- **Responsibilities**:
+  - Review reported content and listings
+  - Ensure compliance with platform guidelines
+  - Moderate forum discussions
+  - Handle user disputes
+- **Skills**: Attention to detail, judgment, communication
+- **Time Commitment**: 5 hours/week
+- **Cost**: THB 300/hour × 5 hours/week × 52 weeks = THB 78,000/year
+
+**11.2.3 System Administrator (Part-Time)**
+- **Role**: System Administrator / DevOps
+- **Responsibilities**:
+  - Server maintenance and monitoring
+  - Database backups and maintenance
+  - Security monitoring
+  - Performance optimization
+  - Deployment management
+- **Skills**: Linux administration, cloud platforms, monitoring tools
+- **Time Commitment**: 8 hours/month
+- **Cost**: THB 500/hour × 8 hours/month × 12 = THB 48,000/year
+
+**Total Operations Team Cost: THB 282,000/year**
+
+### 11.3 Management and Administration
+
+**11.3.1 Project Manager (Part-Time)**
+- **Role**: Project Manager / Product Owner
+- **Responsibilities**:
+  - Overall project coordination
+  - Feature prioritization
+  - Stakeholder communication
+  - Budget management
+  - Strategic planning
+- **Skills**: Project management, communication, technical understanding
+- **Time Commitment**: 10 hours/month
+- **Cost**: THB 600/hour × 10 hours/month × 12 = THB 72,000/year
+
+**11.3.2 Student Union Liaison (Volunteer)**
+- **Role**: Student Union Representative
+- **Responsibilities**:
+  - Bridge between platform and student community
+  - Gather user feedback
+  - Organize promotional events
+  - Community engagement
+- **Compensation**: Volunteer position (may receive platform benefits)
+
+### 11.4 Organizational Structure
+
+```
+                    Project Manager
+                         │
+        ┌────────────────┼────────────────┐
+        │                │                │
+   Development      Operations      Administration
+        │                │                │
+   ┌────┴────┐      ┌────┴────┐      ┌────┴────┐
+   │         │      │         │      │         │
+Backend   Frontend  Support  Mod.   Admin   Finance
+Dev       Dev       Rep      Rep    Panel   (Future)
+```
+
+### 11.5 Recruitment Strategy
+
+**11.5.1 Internal Resources (AIT Community)**
+- AIT students with relevant skills (part-time positions)
+- AIT alumni with technical expertise
+- Faculty members for advisory roles
+- Cost-effective and community-integrated
+
+**11.5.2 External Resources**
+- Professional developers for critical development phases
+- Specialized roles (UI/UX, DevOps) as needed
+- Consultants for specific expertise
+
+### 11.6 Training and Development
+
+**11.6.1 Onboarding**
+- Platform orientation for all team members
+- Technical documentation review
+- Access to development and staging environments
+- Code review processes
+
+**11.6.2 Ongoing Development**
+- Regular team meetings and updates
+- Skill development opportunities
+- Knowledge sharing sessions
+- Stay updated with technology trends
+
+### 11.7 Total Human Resources Cost Summary
+
+**Year 1:**
+- Initial Development: THB 705,000
+- Operations (6 months): THB 141,000
+- Management: THB 36,000
+- **Total Year 1: THB 882,000**
+
+**Year 2 and Beyond (Annual):**
+- Ongoing Development: THB 180,000
+- Operations: THB 282,000
+- Management: THB 72,000
+- **Total Annual: THB 534,000**
+
+*Note: These costs are included in the operational expenses outlined in Section 8.2.*
+
+---
+
+## 12. Payment Methods and Delivery
+
+### 12.1 Payment Methods
+
+**12.1.1 Core Principle: Face-to-Face Transactions**
+
+The AIT Marketplace operates on a **face-to-face transaction model** with **no online payment processing**. This design decision is based on several factors supported by research on trust in C2C marketplaces:
+
+1. **Trust and Security**: Campus community enables in-person verification, which is critical for building trust in peer-to-peer transactions (Rachbini et al., 2019). The restricted access to verified AIT members creates inherent trust that general marketplaces cannot provide.
+
+2. **Cost Reduction**: Eliminates payment gateway fees and processing costs, reducing operational complexity and financial overhead for both the platform and users.
+
+3. **Simplicity**: Reduces complexity and regulatory requirements associated with payment processing, enabling faster development and deployment.
+
+4. **Flexibility**: Allows negotiation and inspection before payment, addressing concerns about product quality and condition that are common in second-hand transactions (Yeap et al., 2022).
+
+5. **Cash Flow**: Immediate payment for sellers, no waiting for platform processing, which is particularly important for students with limited financial resources.
+
+**12.1.2 Supported Payment Methods (Buyer-Seller Agreement)**
+
+Buyers and sellers agree on payment methods during their communication. Common methods include:
+
+**A. Cash Payments**
+- Most common method for campus transactions
+- Immediate settlement
+- No fees or processing delays
+- Suitable for all transaction sizes
+
+**B. Bank Transfers**
+- Direct bank-to-bank transfers
+- Suitable for larger transactions
+- Provides transaction records
+- Common in Thailand (PromptPay, bank transfers)
+
+**C. Mobile Payment Apps**
+- PromptPay (Thailand's national digital payment)
+- Other mobile payment solutions (as agreed between parties)
+- Quick and convenient
+- Digital transaction records
+
+**12.1.3 Platform Payment Features (Future Consideration)**
+
+While the platform does not process payments, it may provide:
+
+- **Payment Method Indicators**: Users can indicate preferred payment methods in profiles
+- **Transaction Records**: Platform tracks completed orders (for record-keeping only)
+- **Payment Verification**: Optional confirmation step after face-to-face payment
+- **Dispute Resolution**: Platform can assist in payment-related disputes
+
+### 12.2 Delivery Methods
+
+**12.2.1 Primary Method: Pickup/Delivery Arrangement**
+
+Since all transactions are face-to-face within the AIT campus community, delivery is arranged directly between buyers and sellers:
+
+**A. Campus Pickup**
+- Seller's dormitory or designated location
+- Agreed meeting time and place
+- Most common for furniture and large items
+- No delivery fees
+
+**B. Campus Delivery**
+- Seller delivers to buyer's location (if agreed)
+- May involve small delivery fee (negotiated between parties)
+- Convenient for buyers
+- Common for smaller items
+
+**C. Neutral Meeting Point**
+- Common campus locations (library, cafeteria, student center)
+- Convenient for both parties
+- Public and safe environment
+- No location bias
+
+**12.2.2 Delivery Information in Listings**
+
+Listings include:
+- **Location**: General area or specific building
+- **Pickup Availability**: Times and days available
+- **Delivery Options**: Whether seller offers delivery
+- **Contact Information**: Phone number for coordination
+
+**12.2.3 Platform Support for Delivery Coordination**
+
+The platform facilitates delivery through:
+- **Integrated Messaging**: Buyers and sellers coordinate via platform chat
+- **Order Management**: Orders include delivery/pickup arrangements
+- **Location Sharing**: Optional location information in profiles
+- **Meeting Reminders**: Notification system for scheduled pickups
+
+### 12.3 Transaction Process
+
+**12.3.1 Standard Transaction Flow**
+
+1. **Discovery**: Buyer browses listings and finds item of interest
+2. **Inquiry**: Buyer contacts seller through platform messaging
+3. **Negotiation**: Price, condition, and delivery method discussed via chat
+4. **Agreement**: Terms agreed upon, order created in platform
+5. **Meeting Arrangement**: Time and location for transaction coordinated
+6. **Inspection**: Buyer inspects item in person (if applicable)
+7. **Payment**: Payment made using agreed method (cash, transfer, etc.)
+8. **Completion**: Order marked as completed in platform
+9. **Feedback**: Optional rating or review (future feature)
+
+**12.3.2 Barter Transaction Flow**
+
+1. **Discovery**: User finds item available for barter
+2. **Proposal**: User proposes barter with their item(s)
+3. **Negotiation**: Parties discuss exchange terms via chat
+4. **Agreement**: Barter proposal accepted
+5. **Meeting**: Both parties meet to exchange items
+6. **Verification**: Both parties inspect received items
+7. **Completion**: Barter marked as completed
+8. **Feedback**: Optional exchange feedback
+
+### 12.4 Safety and Security Measures
+
+**12.4.1 Transaction Safety**
+
+- **Campus-Only Access**: All users are verified AIT community members
+- **User Profiles**: Visible user information builds trust
+- **Transaction History**: Platform records provide accountability
+- **Reporting System**: Users can report suspicious activity
+- **Moderation**: Content and user moderation for safety
+
+**12.4.2 Best Practices Communication**
+
+Platform provides guidance on:
+- Safe meeting locations (public, well-lit areas)
+- Transaction verification (inspect items before payment)
+- Payment security (count cash, verify transfers)
+- Communication etiquette (professional, respectful)
+- Dispute resolution (platform support available)
+
+### 12.5 Advantages of Face-to-Face Model
+
+**12.5.1 For Buyers**
+- **Inspection Before Purchase**: Can verify item condition and authenticity
+- **Immediate Possession**: Receive item immediately after payment
+- **No Shipping Costs**: Saves money on delivery
+- **Personal Interaction**: Builds community connections
+- **Negotiation Opportunity**: Can negotiate in person
+
+**12.5.2 For Sellers**
+- **Immediate Payment**: Receive payment at transaction time
+- **No Platform Fees**: No transaction processing fees
+- **Direct Communication**: Clear communication with buyers
+- **Item Security**: Items remain with seller until transaction
+- **Flexibility**: Can adjust terms during meeting
+
+**12.5.3 For Platform**
+- **Lower Complexity**: No payment processing infrastructure needed
+- **Reduced Costs**: No payment gateway fees or compliance requirements
+- **Faster Development**: Simpler system, quicker to market
+- **Lower Risk**: No financial liability for transactions
+
+---
+
+## 13. Detailed Description of Website Implementation
+
+### 13.1 System Overview
+
+The AIT Marketplace platform is implemented as a full-stack web application following modern software engineering practices. The system architecture employs a decoupled frontend-backend design, enabling independent development, deployment, and scaling of components. This section provides a comprehensive technical description of the platform's implementation.
+
+### 13.2 Frontend Implementation
+
+**13.2.1 Technology Stack and Framework**
+
+The frontend is built using Next.js 14.2.3, a React-based framework that provides server-side rendering (SSR), static site generation (SSG), and optimized performance. TypeScript 5.9.3 ensures type safety and improved developer experience. The application follows the App Router architecture introduced in Next.js 13+, providing file-based routing and improved code organization.
+
+**13.2.2 User Interface Components**
+
+The user interface is constructed using a component-based architecture with reusable React components:
+
+- **Layout Components**: Header, Footer, and Navigation components provide consistent structure across pages
+- **Item Components**: ItemCard, ItemList, and ItemDetail components handle item display and interaction
+- **Form Components**: Input, Button, and Form components with validation and error handling
+- **Interactive Components**: Chat interface, Cart, Wishlist, and Search components with real-time updates
+- **Authentication Components**: Login, Register, and ProtectedRoute components for user authentication
+
+**13.2.3 State Management**
+
+State management is implemented using React's built-in Context API and Hooks:
+- **Authentication Context**: Manages user authentication state, tokens, and session information
+- **Cart Context**: Handles shopping cart state and operations
+- **Notification Context**: Manages in-app notifications and alerts
+- **Internationalization Context**: Supports multilingual functionality
+
+**13.2.4 Routing and Navigation**
+
+The application uses Next.js App Router for client-side routing:
+- **Public Routes**: Homepage, item listings, search, and public forum discussions
+- **Protected Routes**: User profile, cart, wishlist, orders, and personal messaging
+- **Admin Routes**: Administrative dashboard and management interfaces
+- **Dynamic Routes**: Item detail pages (`/items/[id]`), user profiles, and category pages
+
+**13.2.5 Internationalization**
+
+The platform supports multiple languages through next-intl, enabling:
+- English as the primary language
+- Future expansion to Thai and other languages
+- Language switching functionality
+- Localized date, time, and number formatting
+
+**13.2.6 Responsive Design**
+
+The frontend implements responsive design principles using Tailwind CSS:
+- Mobile-first approach for optimal mobile experience
+- Breakpoints for tablet and desktop views
+- Touch-friendly interface elements
+- Optimized images and assets for different screen sizes
+
+### 13.3 Backend Implementation
+
+**13.3.1 API Architecture**
+
+The backend implements a RESTful API using Django REST Framework, following REST principles:
+- **Resource-based URLs**: Clear, hierarchical URL structure
+- **HTTP Methods**: Proper use of GET, POST, PUT, DELETE methods
+- **Status Codes**: Appropriate HTTP status codes for responses
+- **JSON Format**: All API responses in JSON format
+- **Pagination**: Efficient data pagination for large datasets
+
+**13.3.2 Authentication and Authorization**
+
+User authentication is implemented using JWT (JSON Web Tokens):
+- **Token Generation**: Access tokens and refresh tokens for secure authentication
+- **Token Validation**: Middleware validates tokens on protected endpoints
+- **Email Verification**: AIT email domain validation (@ait.ac.th, @ait.asia)
+- **Role-Based Access Control**: Different permission levels for admin, premium, and basic users
+
+**13.3.3 Database Models and Relationships**
+
+The database schema implements comprehensive models with proper relationships:
+
+**User Management:**
+- Custom User model extending Django's AbstractUser
+- Profile information with foreign key relationships
+- Membership status tracking
+
+**Item Management:**
+- Item model with owner relationship, category classification, and image storage
+- Category model with hierarchical structure
+- Support for multiple images per item using JSONField
+
+**Transaction Management:**
+- Order model tracking buyer-seller relationships
+- OrderItem model for order line items
+- Status tracking (pending, confirmed, completed, cancelled)
+
+**Communication:**
+- Message model for private user-to-user communication with item association
+- Conversation grouping and message threading capabilities
+- Privacy-enforced access control ensuring users only see their own conversations
+- RESTful API endpoints for message creation, retrieval, and management
+- Notification model for system notifications
+- Forum model for community discussions
+
+**13.3.4 Business Logic Implementation**
+
+The backend implements complex business logic:
+
+**Item Listing:**
+- Validation of item data (title, description, price, images)
+- Category assignment and validation
+- Image upload and storage handling
+- Availability status management
+
+**Barter System:**
+- Barter proposal creation and management
+- Item matching for barter exchanges
+- Status tracking for barter negotiations
+- Completion and verification processes
+
+**Search Functionality:**
+- Full-text search across item titles and descriptions
+- Category-based filtering
+- Price range filtering
+- Condition-based filtering
+- Location-based filtering
+
+**Order Processing:**
+- Order creation with item validation
+- Status workflow management
+- Transaction history recording
+- Notification triggering
+
+### 13.4 Key Features Implementation
+
+**13.4.1 Item Listing and Management**
+
+The item listing system allows users to:
+- Create detailed listings with multiple images
+- Set prices or mark items as barter-only
+- Select categories from a hierarchical category system
+- Specify item condition (New, Like New, Good, Fair, Poor)
+- Add location and contact information
+- Mark items as featured (premium feature)
+- Edit and delete their own listings
+
+**13.4.2 Barter Trading System**
+
+The barter system enables:
+- Listing items specifically for barter (no price required)
+- Allowing barter on priced items
+- Proposing barter exchanges between users
+- Negotiating barter terms through integrated messaging
+- Tracking barter proposal status
+- Completing barter transactions
+
+**13.4.3 Search and Discovery**
+
+Search functionality includes:
+- Keyword search across titles and descriptions
+- Category filtering with hierarchical navigation
+- Price range filtering
+- Condition filtering
+- Location-based filtering
+- Sort options (price, date, relevance)
+- Featured items section for premium members
+
+**13.4.4 Integrated Messaging and Communication System**
+
+The platform implements a comprehensive private messaging system that facilitates secure, direct communication between buyers and sellers within the AIT community. This system addresses a critical requirement for C2C marketplaces, as research indicates that effective communication channels significantly enhance trust and transaction completion rates in peer-to-peer trading platforms (Rachbini et al., 2019).
+
+**13.4.4.1 System Architecture and Data Model**
+
+The messaging system is built upon a relational database model that ensures data integrity and efficient querying. The core Message model implements the following structure:
+
+- **Sender and Receiver Relationships**: Each message maintains ForeignKey relationships to the User model, establishing clear sender-receiver pairs. The model uses `related_name` attributes (`messages_sent` and `messages_received`) to enable efficient bidirectional querying of user message histories.
+
+- **Item Association**: Messages can be optionally associated with specific items through a nullable ForeignKey to the Item model. This association enables contextual communication, allowing users to discuss specific listings directly from item detail pages. The relationship uses `on_delete=models.SET_NULL` to preserve message history even if items are deleted, maintaining communication records for dispute resolution and historical reference.
+
+- **Message Content and Metadata**: The text field stores message content as a TextField, supporting messages of variable length. Timestamps are automatically managed through `auto_now_add=True`, ensuring accurate chronological ordering. The model's Meta class specifies ordering by `-created_at`, enabling efficient retrieval of recent messages first.
+
+**13.4.4.2 Privacy and Security Implementation**
+
+The messaging system implements robust privacy controls to ensure that communications remain confidential between participants:
+
+- **Query-Level Privacy**: The `MessageViewSet` class overrides the `get_queryset()` method to implement strict access control. The queryset filters messages using a logical OR operation (`|`) that returns only messages where the authenticated user is either the sender or receiver: `Message.objects.filter(sender=user) | Message.objects.filter(receiver=user)`. This ensures that users can only access their own conversations, preventing unauthorized access to other users' private communications.
+
+- **Authentication Requirements**: All messaging endpoints require authentication through JWT tokens, enforced by `permissions.IsAuthenticated` in the permission classes. This prevents anonymous access and ensures that only verified AIT community members can participate in messaging.
+
+- **Automatic Sender Assignment**: The `perform_create()` method automatically assigns the authenticated user as the message sender, preventing users from impersonating others or sending messages on behalf of other accounts. This security measure is critical for maintaining trust in the platform.
+
+- **Read-Only Field Protection**: The serializer designates the `sender` field as read-only, preventing clients from manipulating sender information through API requests. This ensures data integrity and prevents potential security vulnerabilities.
+
+**13.4.4.3 Frontend Implementation and User Experience**
+
+The frontend messaging interface is implemented as a sophisticated React component that provides an intuitive, conversation-based user experience:
+
+- **Conversation Grouping Algorithm**: The system implements a client-side algorithm that groups individual messages into conversations based on user pairs. The `groupMessagesIntoConversations()` function processes the message array, identifying unique user pairs and organizing messages chronologically within each conversation. This approach enables efficient conversation management without requiring additional database queries or server-side processing.
+
+- **Real-Time Updates**: The messaging interface implements automatic refresh functionality, polling the API every 10 seconds to retrieve new messages. This approach provides near-real-time communication while maintaining compatibility with the RESTful API architecture. The polling interval balances responsiveness with server load considerations.
+
+- **Conversation List Interface**: The left panel displays a scrollable list of all user conversations, sorted by the timestamp of the most recent message. Each conversation entry displays the other participant's username, a preview of the last message, and the timestamp, enabling users to quickly identify and access relevant conversations.
+
+- **Message Thread Display**: The right panel presents the selected conversation's message history in a chronological, chat-bubble format. Messages are visually distinguished based on sender identity, with different styling for messages sent by the current user versus received messages. This visual distinction enhances readability and provides clear context for the conversation flow.
+
+- **Item Context Integration**: When messages are associated with specific items, the interface displays a link to the related item, enabling users to quickly reference the item under discussion. This contextual integration streamlines the negotiation process and reduces friction in transaction completion.
+
+- **Message Composition Interface**: The message input area provides a text field with keyboard support for Enter key submission, enabling efficient message composition. The interface includes loading states and error handling to provide feedback during message transmission.
+
+**13.4.4.4 Integration with Item Detail Pages**
+
+The messaging system is seamlessly integrated into the item listing workflow, enabling direct communication initiation from product pages:
+
+- **Contact Seller Functionality**: Item detail pages include a "Contact Seller" button that opens a modal dialog for message composition. This integration eliminates the need for users to navigate away from the item page to initiate communication, reducing friction in the buyer-seller interaction process.
+
+- **Automatic Item Association**: When messages are sent from item detail pages, the system automatically associates the message with the specific item, creating a contextual link between the communication and the listing. This association enables sellers to understand which item a buyer is inquiring about, even when managing multiple listings.
+
+- **Navigation Flow**: After sending a message from an item page, users are automatically redirected to the messaging interface, where they can continue the conversation and view their message history. This flow ensures continuity in the communication process.
+
+**13.4.4.5 API Design and Endpoints**
+
+The messaging system exposes RESTful API endpoints following Django REST Framework conventions:
+
+- **Message List Endpoint** (`GET /api/chat/messages/`): Retrieves all messages for the authenticated user, filtered to include only conversations where the user is a participant. The endpoint supports pagination for users with extensive message histories.
+
+- **Message Creation Endpoint** (`POST /api/chat/messages/`): Accepts message creation requests with receiver ID, optional item ID, and message text. The endpoint validates input data, automatically assigns the sender, and persists the message to the database.
+
+- **Message Retrieval Endpoint** (`GET /api/chat/messages/{id}/`): Enables retrieval of individual messages by ID, subject to privacy constraints ensuring the authenticated user is a participant in the conversation.
+
+**13.4.4.6 Data Serialization and Response Format**
+
+The `MessageSerializer` class handles data transformation between database models and API responses:
+
+- **Read-Only Computed Fields**: The serializer includes `sender_username` and `receiver_username` as read-only fields, automatically populated from the related User objects. This design eliminates the need for additional API calls to retrieve user information, improving performance and reducing client-side complexity.
+
+- **Field Selection**: The serializer exposes only necessary fields (id, sender, sender_username, receiver, receiver_username, item, text, created_at), following the principle of least privilege and reducing unnecessary data transfer.
+
+**13.4.4.7 User Interface Design and Accessibility**
+
+The messaging interface implements responsive design principles and accessibility considerations:
+
+- **Responsive Layout**: The interface uses a two-column layout on desktop devices (conversation list and message thread) that adapts to a single-column mobile layout, ensuring usability across device types.
+
+- **Visual Feedback**: Loading states, error messages, and success confirmations provide clear feedback to users about system status and action outcomes.
+
+- **Internationalization Support**: All user-facing text in the messaging interface is internationalized, supporting English, Chinese, and Thai languages through the platform's translation system.
+
+**13.4.4.8 Performance Considerations**
+
+The messaging system implements several performance optimizations:
+
+- **Efficient Querying**: The queryset filtering uses database-level filtering, leveraging database indexes for optimal query performance. The use of ForeignKey relationships enables efficient JOIN operations.
+
+- **Client-Side Processing**: Conversation grouping and sorting are performed client-side, reducing server load and enabling responsive user interactions without additional API calls.
+
+- **Pagination Support**: The API supports pagination for message retrieval, enabling efficient handling of users with extensive message histories.
+
+**13.4.4.9 Future Enhancement Opportunities**
+
+The current messaging implementation provides a foundation for future enhancements:
+
+- **Real-Time WebSocket Integration**: The system architecture supports migration to WebSocket-based real-time communication using Django Channels, which would eliminate polling overhead and provide true real-time messaging.
+
+- **Read Receipt Functionality**: The data model can be extended to include read status tracking, enabling users to see when their messages have been read.
+
+- **Message Search and Filtering**: Advanced search capabilities within message history would enhance usability for users with extensive conversation histories.
+
+- **File and Image Attachments**: The system can be extended to support file and image sharing within messages, enabling users to share additional context during negotiations.
+
+- **Push Notifications**: Integration with browser push notification APIs would alert users to new messages even when not actively using the platform.
+
+This comprehensive messaging system enhances the platform's functionality by facilitating direct communication between users, thereby supporting transaction completion, trust building, and community engagement within the AIT marketplace ecosystem.
+
+**13.4.5 Order Management**
+
+Order management features:
+- Order creation from item listings
+- Status tracking throughout transaction lifecycle
+- Order history for buyers and sellers
+- Order details with item information
+- Transaction records for completed orders
+- Cancellation and dispute handling
+
+**13.4.6 Community Forum**
+
+Forum functionality includes:
+- Category-based discussion boards
+- Thread creation and replies
+- User participation tracking
+- Content moderation tools
+- Search within forum discussions
+- Community engagement metrics
+
+**13.4.7 Notification System**
+
+Notification system provides:
+- Real-time in-app notifications
+- Email notifications for important events
+- Notification center with history
+- Notification preferences management
+- Unread notification counts
+- Action links within notifications
+
+**13.4.8 Administrative Dashboard**
+
+Admin panel features:
+- User management and moderation
+- Content moderation tools
+- Platform statistics and analytics
+- System monitoring
+- Category management
+- Advertisement management
+- Report handling
+
+### 13.5 Security Implementation
+
+**13.5.1 Authentication Security**
+
+- JWT tokens with configurable expiration times
+- Secure password hashing using Django's PBKDF2
+- Email domain validation for AIT community
+- Session management and token refresh mechanisms
+- Protection against brute force attacks
+
+**13.5.2 Data Security**
+
+- HTTPS encryption for all communications
+- SQL injection prevention through Django ORM
+- XSS prevention through React's built-in escaping
+- CSRF protection via Django middleware
+- Input validation and sanitization
+- Secure file upload handling with type and size validation
+
+**13.5.3 Access Control**
+
+- Role-based access control (RBAC) implementation
+- Resource-level permissions
+- API rate limiting to prevent abuse
+- Protected routes and endpoints
+- Admin-only features and endpoints
+
+### 13.6 Performance Optimization
+
+**13.6.1 Frontend Optimization**
+
+- Code splitting and lazy loading
+- Image optimization and lazy loading
+- Caching strategies for static assets
+- Minimized bundle sizes
+- Efficient re-rendering with React optimization
+
+**13.6.2 Backend Optimization**
+
+- Database query optimization with select_related and prefetch_related
+- Database indexing on frequently queried fields
+- API response caching using Redis
+- Pagination for large datasets
+- Efficient serialization
+
+**13.6.3 Infrastructure Optimization**
+
+- CDN for static asset delivery
+- Database connection pooling
+- Redis caching layer
+- Asynchronous task processing with Celery
+- Load balancing capabilities
+
+### 13.7 Testing and Quality Assurance
+
+**13.7.1 Testing Strategy**
+
+- Unit tests for individual components and functions
+- Integration tests for API endpoints
+- End-to-end tests for critical user flows
+- Security testing for vulnerabilities
+- Performance testing for load handling
+
+**13.7.2 Quality Assurance Processes**
+
+- Code review processes
+- Automated testing in CI/CD pipeline
+- Manual testing for user experience
+- Security audits
+- Performance monitoring
+
+### 13.8 Deployment and DevOps
+
+**13.8.1 Development Environment**
+
+- Local development setup with Docker Compose
+- Hot-reload for both frontend and backend
+- SQLite database for development
+- Development tools and debugging support
+
+**13.8.2 Production Deployment**
+
+- Containerized deployment with Docker
+- Cloud hosting (AWS/DigitalOcean recommended)
+- PostgreSQL database for production
+- Redis for caching and task queue
+- Nginx reverse proxy
+- SSL certificates via Let's Encrypt
+- Automated deployment pipelines
+
+**13.8.3 Monitoring and Maintenance**
+
+- Application performance monitoring
+- Error tracking and logging
+- Database backup and recovery procedures
+- Security monitoring
+- Regular updates and patches
+
+### 13.9 Future Enhancements
+
+**13.9.1 Planned Features**
+
+- User rating and review system
+- Advanced analytics dashboard for users
+- Mobile application (iOS/Android)
+- Enhanced search with AI recommendations
+- Integration with AIT student information system
+- Automated matching for barter exchanges
+
+**13.9.2 Scalability Improvements**
+
+- Microservices architecture migration (if needed)
+- Database sharding for large datasets
+- CDN expansion for global access
+- Advanced caching strategies
+- Load balancing for high traffic
+
+---
+
+## 14. Conclusion
+
+### 14.1 Summary
+
+This report has presented a comprehensive analysis of the AIT Second-Hand Marketplace Platform, a specialized e-commerce solution designed exclusively for the Asian Institute of Technology student community. The platform addresses critical challenges faced by students in acquiring and disposing of essential items while promoting sustainability, economic efficiency, and community engagement.
+
+The platform implements a Consumer-to-Consumer (C2C) e-commerce model with unique features including barter trading, integrated messaging, and community forums, all operating within a secure, campus-restricted environment. The face-to-face transaction model eliminates the need for online payment processing, reducing complexity and costs while maintaining trust and security within the campus community.
+
+### 14.2 Key Achievements
+
+**14.2.1 Technical Implementation**
+
+The platform successfully implements a modern, scalable architecture using industry-standard technologies:
+- Full-stack implementation with Next.js frontend and Django backend
+- Comprehensive feature set including item listing, barter trading, messaging, and community forums
+- Robust security measures ensuring safe transactions within the campus community
+- Responsive design supporting multiple devices and screen sizes
+
+**14.2.2 Business Model**
+
+The freemium business model provides:
+- Free access for all AIT community members, ensuring inclusivity
+- Premium features for enhanced visibility and analytics
+- Sustainable revenue streams through memberships and featured listings
+- Alignment with student budget constraints
+
+**14.2.3 Community Impact**
+
+The platform contributes to:
+- Economic support for students through affordable second-hand items
+- Environmental sustainability through waste reduction and reuse
+- Community building through trading interactions and forums
+- Cultural inclusion for international students
+
+### 14.3 Challenges and Solutions
+
+**14.3.1 Technical Challenges**
+
+- **Scalability**: Addressed through modern architecture, caching strategies, and cloud infrastructure
+- **Security**: Implemented comprehensive security measures including JWT authentication, input validation, and access control
+- **User Experience**: Designed intuitive interface with responsive design and multilingual support
+
+**14.3.2 Business Challenges**
+
+- **User Adoption**: Mitigated through student union endorsement, orientation integration, and early adopter incentives
+- **Revenue Generation**: Balanced through freemium model ensuring accessibility while providing premium value
+- **Competition**: Differentiated through AIT-exclusive access, specialized features, and community focus
+
+### 14.4 Future Directions
+
+**14.4.1 Short-term (6-12 months)**
+
+- Launch and initial user acquisition
+- Feature refinement based on user feedback
+- Community engagement and retention strategies
+- Performance optimization and bug fixes
+
+**14.4.2 Medium-term (1-2 years)**
+
+- Expansion to faculty and staff
+- Mobile application development
+- Enhanced analytics and reporting
+- Integration with AIT systems
+
+**14.4.3 Long-term (2+ years)**
+
+- Potential expansion to other universities
+- Advanced AI features for recommendations
+- Sustainability impact measurement
+- Research collaboration opportunities
+
+### 14.5 Contribution to E-Business Knowledge
+
+This project contributes to the e-business field by:
+
+1. **Campus-Specific E-Commerce Model**: Demonstrates the viability of specialized, community-restricted marketplaces
+2. **Barter Integration**: Shows how traditional barter systems can be digitized within modern e-commerce platforms
+3. **Face-to-Face E-Commerce**: Explores the hybrid model combining online discovery with offline transactions
+4. **Sustainability in E-Commerce**: Integrates environmental considerations into platform design and operations
+5. **Trust-Based Transactions**: Leverages community trust as a competitive advantage in C2C marketplaces
+
+### 14.6 Final Remarks
+
+The AIT Second-Hand Marketplace Platform represents a comprehensive solution to real-world challenges faced by university students. By combining modern web technologies with community-focused design, the platform creates value for students while promoting sustainability and economic efficiency.
+
+The project demonstrates that specialized, community-based e-commerce platforms can successfully address unique market needs while maintaining financial viability. The face-to-face transaction model, combined with comprehensive online features, provides a balanced approach that ensures security, trust, and user satisfaction.
+
+As the platform evolves, it will continue to serve the AIT community while contributing to the broader understanding of e-business models, sustainable consumption, and community-based digital marketplaces. The success of this platform may serve as a model for similar initiatives at other educational institutions worldwide.
+
+---
+
+## References
+
+Aggarwal, S., Jha, S., Paliwal, M., Taufique, K. M. R., & Dastane, O. (2025). Second-hand clothing consumption as a driver of circular economy: review, synthesis and research agenda. *Journal of Fashion Marketing and Management*. https://doi.org/10.1108/jfmm-08-2024-0339
+
+Castellani, V., Sala, S., & Mirabella, N. (2015). Beyond the throwaway society: A life cycle‐based assessment of the environmental benefit of reuse. *Integrated Environmental Assessment and Management*, 11(3), 373-382. https://doi.org/10.1002/ieam.1614
+
+D'Adamo, I., Lupi, G., Morone, P., & Settembre-Blundo, D. (2022). Towards the circular economy in the fashion industry: the second-hand market as a best practice of sustainable responsibility for businesses and consumers. *Environmental Science and Pollution Research*, 29(31), 46620-46633. https://doi.org/10.1007/s11356-022-19255-2
+
+Huang, Y., Finsterwalder, J., Chen, N., & Crawford, F. R. L. (2022). Online student engagement and place attachment to campus in the new service marketplace: an exploratory study. *Journal of Services Marketing*, 36(4), 517-532. https://doi.org/10.1108/jsm-04-2021-0148
+
+Ismail, M. F., Aziz, M. A., Nor, F. N. S. M., Aris, S. R. S., & Zambri, S. (2020). Student online marketplace for university community. *Indonesian Journal of Electrical Engineering and Computer Science*, 19(1), 420-427. https://doi.org/10.11591/IJEECS.V19.I1.PP420-427
+
+Jafri, M. D. M., Yi, K. W., Mustafa, N., Ikram, R. R. R., & Yusop, N. (2025). Design and Development of a Smart Student Rental Platform for Sustainable Campus Communities. *International Journal of Research and Innovation in Social Science*, 9(9). https://doi.org/10.47772/ijriss.2025.90900071
+
+Karlina, B., Lestari, I., Indrasti, A. W., & Faeni, D. P. (2019). The Determination of Customer Purchasing Decision through E-Business Model in Online Marketplaces. *Proceedings of the 1st International Conference on IT, Communication and Technology for Better Life*, 166-171. https://doi.org/10.5220/0008931201660171
+
+Parodos, L., Tsolakis, O., Tsoukos, G., Xenou, E., & Ayfantopoulou, G. (2022). Business Model Analysis of Smart City Logistics Solutions Using the Business Model Canvas: The Case of an On-Demand Warehousing E-Marketplace. *Future Transportation*, 2(2), 456-474. https://doi.org/10.3390/futuretransp2020026
+
+Rachbini, W., Hatta, I., & Evi, T. (2019). Determinants of Trust and Customer Loyalty on C2C E-Marketplace in Indonesia. *The International Journal of Management*, 10(3), 12-25. https://doi.org/10.34218/ijm.10.3.2019.012
+
+Wang, L., & Sun, H. (2023). Influencing Factors of Second-Hand Platform Trading in C2C E-commerce. *Journal of Intelligent Management Decision*, 2(1), 15-25. https://doi.org/10.56578/jimd020103
+
+Yeap, J. A. L., Ooi, S. K., Yapp, E., & Ramesh, N. (2022). Preloved is reloved: investigating predispositions of second-hand clothing purchase on C2C platforms. *Service Industries Journal*, 42(15-16), 1271-1296. https://doi.org/10.1080/02642069.2022.2127689
+
+---
+
+## Appendices
+
+### Appendix A: Technical Specifications
+
+**System Requirements:**
+- Frontend: Node.js 18+, Next.js 14.2.3
+- Backend: Python 3.10+, Django 4.2+
+- Database: PostgreSQL 13+ (production), SQLite3 (development)
+- Cache: Redis 6+
+- Web Server: Nginx 1.20+
+- Container: Docker 20.10+
+
+### Appendix B: API Documentation
+
+Complete API documentation is available at: `/api/docs/` (when deployed)
+
+**Key Endpoints:**
+- Authentication: `/api/users/token/`
+- Items: `/api/items/`
+- Barter: `/api/barter/`
+- Messages: `/api/chat/messages/`
+- Orders: `/api/orders/`
+
+### Appendix C: User Guide
+
+A comprehensive user guide is available within the platform's help section, covering:
+- Account registration and verification
+- Creating and managing listings
+- Using the barter system
+- Messaging and communication
+- Order management
+- Safety guidelines
+
+### Appendix D: Financial Projections Details
+
+Detailed financial models and assumptions are available upon request, including:
+- User growth projections
+- Revenue model calculations
+- Cost structure analysis
+- Break-even analysis
+- Sensitivity analysis
+
+---
+
+**Report Prepared By:** [Your Name/Team]  
+**Date:** [Current Date]  
+**Institution:** Asian Institute of Technology (AIT)  
+**Project:** AIT Second-Hand Marketplace Platform

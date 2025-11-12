@@ -29,9 +29,18 @@ export default function FeaturedPage() {
 
   const loadFeaturedItems = async () => {
     try {
-      const response = await apiClient.getItems({ featured: true })
-      if (response.data?.results) {
-        setItems(response.data.results)
+      const response = await apiClient.getItems({ featured: 'true' })
+      if (response.data) {
+        // Handle both paginated and non-paginated responses
+        let items: Item[] = []
+        if (Array.isArray(response.data)) {
+          items = response.data
+        } else if (response.data.results && Array.isArray(response.data.results)) {
+          items = response.data.results
+        } else if (Array.isArray(response.data)) {
+          items = response.data
+        }
+        setItems(items)
       }
     } catch (error) {
       console.error('Failed to load featured items:', error)
@@ -98,7 +107,7 @@ export default function FeaturedPage() {
                   </p>
                   <div className="mt-4 flex items-center justify-between">
                     <div className="text-lg font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-cyan-400">
-                      {item.price != null ? `¥${item.price}` : t('list.priceNegotiable', 'Negotiable')}
+                      {item.price != null ? `${item.price} ${t('item.priceSymbol', 'THB')}` : t('list.priceNegotiable', 'Negotiable')}
                     </div>
                   </div>
                   <div className="mt-2 text-xs text-gray-500 dark:text-gray-400">

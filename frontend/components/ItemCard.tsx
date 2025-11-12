@@ -45,7 +45,7 @@ export default function ItemCard({ item, showActions = false, onAddToWishlist, o
         {showActions && (
           <div className="absolute bottom-3 right-3 flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
             <Link href={`/items/${item.id}`} className="btn-primary px-3 py-1.5 text-sm">
-              {t('list.viewDetail', '查看详情')}
+              {t('list.viewDetail', 'View Details')}
             </Link>
           </div>
         )}
@@ -63,7 +63,7 @@ export default function ItemCard({ item, showActions = false, onAddToWishlist, o
 
         <div className="mt-4 flex items-center justify-between">
           <div className="text-lg font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-cyan-400">
-            {item.price != null ? `¥${item.price}` : t('list.priceNegotiable', '面议')}
+            {item.price != null ? `${item.price} ${t('item.priceSymbol', 'THB')}` : t('list.priceNegotiable', 'Negotiable')}
           </div>
           <div className="flex items-center gap-4 text-slate-500 dark:text-slate-400 text-sm">
             <span className="inline-flex items-center gap-1">
@@ -77,7 +77,7 @@ export default function ItemCard({ item, showActions = false, onAddToWishlist, o
 
         {item.owner_username && (
           <div className="mt-3 text-xs text-slate-500 dark:text-slate-400">
-            {t('list.seller', '卖家：')}{item.owner_username}
+            {t('list.seller', 'Seller:')} {item.owner_username}
           </div>
         )}
 
@@ -85,7 +85,7 @@ export default function ItemCard({ item, showActions = false, onAddToWishlist, o
           <div className="mt-3 flex gap-2">
             {onAddToCart && (
               <button onClick={onAddToCart} className="btn-primary flex-1 text-sm">
-                {t('cart.add', 'เพิ่มลงตะกร้า')}
+                {t('cart.add', 'Add to Cart')}
               </button>
             )}
             {onAddToWishlist && (

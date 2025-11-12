@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import { useI18n } from '../../../components/I18nProviderClient'
-import { Package, Heart, Eye, User, MapPin, Calendar, DollarSign } from 'lucide-react'
+import { Package, Heart, Eye, User, MapPin, Calendar, DollarSign, MessageCircle } from 'lucide-react'
 
 const API = process.env.NEXT_PUBLIC_API_BASE || 'http://localhost:8000/api'
 
@@ -34,6 +34,9 @@ export default function ItemDetailPage() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [selectedImageIndex, setSelectedImageIndex] = useState(0)
+  const [showChatModal, setShowChatModal] = useState(false)
+  const [chatMessage, setChatMessage] = useState('')
+  const [sendingMessage, setSendingMessage] = useState(false)
 
   useEffect(() => {
     const fetchItem = async () => {
@@ -75,10 +78,10 @@ export default function ItemDetailPage() {
         body: JSON.stringify({ item_id: item?.id, quantity: 1 })
       })
       if (res.ok) {
-        alert(t('cart.added', 'เพิ่มลงตะกร้าแล้ว'))
+        alert(t('cart.added', 'Added to cart'))
       }
     } catch (err) {
-      alert(t('cart.error', 'เกิดข้อผิดพลาด'))
+      alert(t('cart.error', 'Operation failed'))
     }
   }
 
@@ -98,10 +101,90 @@ export default function ItemDetailPage() {
         body: JSON.stringify({ item_id: item?.id })
       })
       if (res.ok) {
-        alert(t('wishlist.added', 'เพิ่มลงรายการโปรดแล้ว'))
+        alert(t('wishlist.added', 'Added to wishlist'))
       }
     } catch (err) {
-      alert(t('wishlist.error', 'เกิดข้อผิดพลาด'))
+      alert(t('wishlist.error', 'Operation failed'))
+    }
+  }
+
+  const handleContactSeller = () => {
+    const token = localStorage.getItem('access')
+    if (!token) {
+      router.push('/login')
+      return
+    }
+    if (!item?.owner) {
+      alert(t('item.noOwner', 'Cannot contact seller'))
+      return
+    }
+    setShowChatModal(true)
+  }
+
+  const handleSendMessage = async () => {
+    if (!chatMessage.trim() || !item?.owner) {
+      if (!item?.owner) {
+        alert(t('item.noOwner', 'Cannot contact seller'))
+      }
+      return
+    }
+    
+    const token = localStorage.getItem('access')
+    if (!token) {
+      router.push('/login')
+      return
+    }
+
+    setSendingMessage(true)
+    try {
+      const requestBody = {
+        receiver: item.owner, // This should be the user ID (number)
+        item: item.id, // Item ID (optional, can be null)
+        text: chatMessage.trim()
+      }
+      
+      console.log('Sending message:', requestBody)
+      
+      const res = await fetch(`${API}/chat/messages/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(requestBody)
+      })
+      
+      if (res.ok) {
+        setChatMessage('')
+        setShowChatModal(false)
+        alert(t('chat.sent', 'Message sent'))
+        // Optional: navigate to chat page
+        router.push('/chat')
+      } else {
+        const data = await res.json()
+        // Show detailed error message
+        let errorMsg = t('chat.failed', 'Failed to send')
+        if (data?.detail) {
+          errorMsg = data.detail
+        } else if (data?.non_field_errors) {
+          errorMsg = Array.isArray(data.non_field_errors) ? data.non_field_errors.join(', ') : data.non_field_errors
+        } else if (data) {
+          // Show first field error if available
+          const firstError = Object.values(data)[0]
+          if (Array.isArray(firstError)) {
+            errorMsg = firstError[0]
+          } else if (typeof firstError === 'string') {
+            errorMsg = firstError
+          }
+        }
+        console.error('Chat message error:', data)
+        alert(errorMsg)
+      }
+    } catch (err) {
+      console.error('Chat message exception:', err)
+      alert(t('chat.error', 'Error sending message'))
+    } finally {
+      setSendingMessage(false)
     }
   }
 
@@ -122,9 +205,9 @@ export default function ItemDetailPage() {
       <div className="container-app mt-8">
         <div className="card">
           <div className="card-body text-center py-16">
-            <h3 className="text-lg font-semibold">{t('error.notFound', 'ไม่พบสินค้า')}</h3>
+            <h3 className="text-lg font-semibold">{t('error.notFound', 'Item not found')}</h3>
             <button onClick={() => router.push('/')} className="btn-primary mt-4">
-              {t('common.back', 'กลับหน้าแรก')}
+              {t('common.back', 'Back to home')}
             </button>
           </div>
         </div>
@@ -189,12 +272,12 @@ export default function ItemDetailPage() {
               <div className="flex items-center gap-6 mb-6">
                 {item.price != null && (
                   <div className="text-3xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-cyan-400">
-                    ¥{item.price}
+                    {item.price} {t('item.priceSymbol', 'THB')}
                   </div>
                 )}
                 {item.is_barter && (
                   <div className="px-4 py-2 rounded-full bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 text-sm font-medium">
-                    {t('item.barter', 'แลกเปลี่ยน')}
+                    {t('item.barter', 'Barter')}
                   </div>
                 )}
               </div>
@@ -209,7 +292,7 @@ export default function ItemDetailPage() {
                 {item.condition && (
                   <div className="flex items-center gap-2 text-slate-600 dark:text-slate-400">
                     <Package className="h-4 w-4" />
-                    <span>{t('item.condition', 'สภาพ')}: {item.condition}</span>
+                    <span>{t('item.condition', 'Condition')}: {item.condition}</span>
                   </div>
                 )}
                 {item.location && (
@@ -235,7 +318,7 @@ export default function ItemDetailPage() {
               {item.is_barter && item.desired_item && (
                 <div className="mb-6 p-4 rounded-xl bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800">
                   <div className="font-semibold text-blue-900 dark:text-blue-300 mb-2">
-                    {t('item.desiredItem', 'ต้องการแลกเปลี่ยนกับ')}:
+                    {t('item.desiredItem', 'Desired item')}:
                   </div>
                   <div className="text-blue-700 dark:text-blue-400">{item.desired_item}</div>
                 </div>
@@ -244,9 +327,13 @@ export default function ItemDetailPage() {
               <div className="flex gap-3">
                 {!item.is_barter && (
                   <button onClick={handleAddToCart} className="btn-primary flex-1">
-                    {t('cart.add', 'เพิ่มลงตะกร้า')}
+                    {t('cart.add', 'Add to Cart')}
                   </button>
                 )}
+                <button onClick={handleContactSeller} className="btn-primary flex-1">
+                  <MessageCircle className="h-4 w-4 mr-2" />
+                  {t('item.contactSeller', 'Contact Seller')}
+                </button>
                 <button onClick={handleAddToWishlist} className="btn-outline">
                   <Heart className="h-4 w-4" />
                 </button>
@@ -270,6 +357,44 @@ export default function ItemDetailPage() {
           </div>
         </div>
       </div>
+
+      {/* Chat Modal */}
+      {showChatModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white dark:bg-slate-800 rounded-xl max-w-md w-full p-6">
+            <h3 className="text-xl font-bold mb-4">{t('item.contactSeller', 'Contact Seller')}</h3>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+              {t('item.sendMessageTo', 'Send message to')}: <strong>{item.owner_username}</strong>
+            </p>
+            <textarea
+              value={chatMessage}
+              onChange={(e) => setChatMessage(e.target.value)}
+              placeholder={t('item.messagePlaceholder', 'Enter your message...')}
+              className="w-full p-3 border border-gray-300 dark:border-slate-600 rounded-lg mb-4 min-h-[120px] resize-none focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-slate-700 dark:text-white"
+              disabled={sendingMessage}
+            />
+            <div className="flex gap-3">
+              <button
+                onClick={() => {
+                  setShowChatModal(false)
+                  setChatMessage('')
+                }}
+                className="btn-outline flex-1"
+                disabled={sendingMessage}
+              >
+                {t('common.cancel', 'Cancel')}
+              </button>
+              <button
+                onClick={handleSendMessage}
+                className="btn-primary flex-1"
+                disabled={sendingMessage || !chatMessage.trim()}
+              >
+                {sendingMessage ? t('chat.sending', 'Sending...') : t('chat.send', 'Send')}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
